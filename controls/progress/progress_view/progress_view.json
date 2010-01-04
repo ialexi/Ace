@@ -1,7 +1,0 @@
-{
-	"slices": [
-		["progress_bar_left", 0, 8],
-		["progress_bar_right", -8],
-		["progress_bar_middle", 8, 1]
-	]
-}

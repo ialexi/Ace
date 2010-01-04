@@ -9,8 +9,8 @@ I think if it were easier to really modify Ace and create all the sprites and su
 it would be improved more often. (Perhaps it is easily updated and I am missing how?)
 
 I want to rearrange the theme into a directory for each control. The directory
-would usually have three files: a CSS file, a JSON file, and an image (likely
-a PSD).
+would usually have a few files: some image files, some JSON files (one for each image), and
+one CSS file.
 
 A build tool which does not yet exist (but which maybe I can create with Ruby and
 some library; RMagick, perhaps?) would perform a few steps:
@@ -69,3 +69,7 @@ You could run like this:
 	generate-theme ace ace-theme
 
 from the folder containing the "ace" folder, and it would generate everything SproutCore needs.
+
+
+If all else fails, we could sprite it manually. Or copy'n'paste over the present sprites. Which
+will still be easier if each piece is isolated, so moving into separate files still makes sense. :)

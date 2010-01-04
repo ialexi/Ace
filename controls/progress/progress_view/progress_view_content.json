@@ -1,0 +1,7 @@
+{
+	"slices": [
+		["progress_view_track_left", 0, 8],
+		["progress_view_track_right", -8],
+		["progress_view_track_middle", 8, 1]
+	]
+}

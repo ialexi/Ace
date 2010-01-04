@@ -7,9 +7,9 @@ sprite names are defined in the .json files.
 Think this can be pulled off?
 */
 .sc-progress-view._theme {
-  sprite("progress_view_track")
+  sprite("progress_view_track_middle")
 }
 
 .sc-progress-view._theme .inner {
-  sprite("progress_view_content")
+  sprite("progress_view_content_middle")
 }
