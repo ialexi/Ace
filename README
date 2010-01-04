@@ -1,3 +1,71 @@
 There are two PSDs: Light and Dark.
 
 Dark doesn't receive as much attention, and it shows.
+
+
+Build Tools
+===========
+I think if it were easier to really modify Ace and create all the sprites and such,
+it would be improved more often. (Perhaps it is easily updated and I am missing how?)
+
+I want to rearrange the theme into a directory for each control. The directory
+would usually have three files: a CSS file, a JSON file, and an image (likely
+a PSD).
+
+A build tool which does not yet exist (but which maybe I can create with Ruby and
+some library; RMagick, perhaps?) would perform a few steps:
+
+* Read slice configs from JSON. (controls usually have 1-3 slices; some may have more)
+* Create a sprite plan
+	- needs to know how to combine x-repeated and no-repeat images into a single file,
+	  but only do so if it won't waste X amount of space.
+* Generate sprite images.
+* Generate CSS.
+
+The CSS files would have a couple of special features:
+
+- The class name .\_theme gets replaced with the theme name.
+- sprite("a\_sprite\_name") would be replaced with background: and background-position: settings.
+  they can be tweaked (for instance, the repeat settings) by overriding, but will usually be
+  correct out of the box. background would be set to something like "static\_url('the-image-name.png') repeat-x 0 -456px"
+
+The CSS files would contain definitions like:
+
+	.sc-button._theme { 
+		background: sprite_url("progress_bar")
+	}
+
+The JSON files would look like:
+
+	{
+		"target": "main", // optional
+		"slices": [
+			["progress_bar_left", 0, 8],
+			["progress_bar_right", -8],
+			["progress_bar_middle", 8, 1, { "target": "repeat-x" }]
+		]
+	}
+
+In this example, three slices are defined for the sprite. The "target" specifies which output
+directory it will go into (the default would be "main"). Each slice definition may override
+these settings as well.
+
+Slice definitions work as follows:
+
+	[<name>, <optional: left start>, <optional: width>, options...]
+
+The left start position can be negative, indicating a distance from the right edge. Widths
+(and heights, where they are used) can be any positive number _or_ 0. 0 indicates the entire
+width/height of the image.
+
+Using options, one should be able to define an arbitrary slice:
+
+	{"rect": [0, 0, 8, 0] } // 0, 0, 8 wide, 100% high.
+
+
+
+You could run like this:
+	
+	generate-theme ace ace-theme
+
+from the folder containing the "ace" folder, and it would generate everything SproutCore needs.
