@@ -8,68 +8,49 @@ Build Tools
 I think if it were easier to really modify Ace and create all the sprites and such,
 it would be improved more often. (Perhaps it is easily updated and I am missing how?)
 
-I want to rearrange the theme into a directory for each control. The directory
-would usually have a few files: some image files, some JSON files (one for each image), and
-one CSS file.
-
 A build tool which does not yet exist (but which maybe I can create with Ruby and
-some library; RMagick, perhaps?) would perform a few steps:
+some library; RMagick, perhaps?) would be run using a command, or possibly as part
+of SproutCore's own build tools.
 
-* Read slice configs from JSON. (controls usually have 1-3 slices; some may have more)
-* Create a sprite plan
-	- needs to know how to combine x-repeated and no-repeat images into a single file,
-	  but only do so if it won't waste X amount of space.
-* Generate sprite images.
-* Generate CSS.
+The operation would work on a single "theme folder", and create one CSS file and a
+handful of image files out of all of the individual CSS and image files.
 
-The CSS files would have a couple of special features:
+The theme packaging operation is recursive (much like SproutCore's build tools), so
+any folder depth may be used. The suggested folder layout is this:
 
-- The class name .\_theme gets replaced with the theme name.
-- sprite("a\_sprite\_name") would be replaced with background: and background-position: settings.
-  they can be tweaked (for instance, the repeat settings) by overriding, but will usually be
-  correct out of the box. background would be set to something like "static\_url('the-image-name.png') repeat-x 0 -456px"
+* Theme Folder
+	* View Category Folders (controls, containers, etc.)
+		* Views (button\_view, progress\_view, etc.)
+			* 1 CSS file
+			* 0+ images (PSDs, usually)
 
-The CSS files would contain definitions like:
+Each CSS file will reference images relative to itself. So, controls/progress\_view/progress_view.css
+could reference "progress\_view.png".
 
-	.sc-button._theme { 
-		background: sprite_url("progress_bar")
-	}
+CSS Syntax
+----------
+Normal CSS won't work too well for accessing Sprites. It will work even less when
+you need to perform slicing (do not talk to me about Photoshop slicing).
 
-The JSON files would look like:
+However, I do not want to parse CSS.
+
+Here is a possible syntax:
 
 	{
-		"target": "main", // optional
-		"slices": [
-			["progress_bar_left", 0, 8],
-			["progress_bar_right", -8],
-			["progress_bar_middle", 8, 1, { "target": "repeat-x" }]
-		]
+		/*
+		 What is the bare minimum to specify? input file, repeat (if any), and slice rectangle
+		*/
+		background: sprite("progress_view_track.png" repeat-x [12 1]);
 	}
 
-In this example, three slices are defined for the sprite. The "target" specifies which output
-directory it will go into (the default would be "main"). Each slice definition may override
-these settings as well.
+The build tools would just search for sprite(, and then parse the contents.
 
-Slice definitions work as follows:
+The syntax is:
 
-	[<name>, <optional: left start>, <optional: width>, options...]
-
-The left start position can be negative, indicating a distance from the right edge. Widths
-(and heights, where they are used) can be any positive number _or_ 0. 0 indicates the entire
-width/height of the image.
-
-Using options, one should be able to define an arbitrary slice:
-
-	{"rect": [0, 0, 8, 0] } // 0, 0, 8 wide, 100% high.
-
-
-
-You could run like this:
+	sprite(<sprite name> [<repeat method>] [<rect or partial rect>])
 	
-	generate-theme ace ace-theme
+	Sprite name: 		the name of the image (quotes required only for images with spaces)
+	Partial Rectangle: 	\[ left [width] \]			// left can be positive or negative.
+	Rectangle:		   	\[ left top width height \]
 
-from the folder containing the "ace" folder, and it would generate everything SproutCore needs.
-
-
-If all else fails, we could sprite it manually. Or copy'n'paste over the present sprites. Which
-will still be easier if each piece is isolated, so moving into separate files still makes sense. :)
+It should be rather trivial to parse, yet also easy to read.
