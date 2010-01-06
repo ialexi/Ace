@@ -1,15 +1,19 @@
 /* 
 Syntax Notes: 
-._THEME gets replaced with the theme class name.
+@view(view-name) is replaced with .sc-view.view-name.theme-name
+
+theme-name is specified as an argument when building.
+
 [8] means a rectangle starting at x=8, the whole height, to the right edge.
 [8, 1] means rectangle starting at x=8, width 1px, whole height
 [8, 2, 1, 1] means a 1x1 rectangle at 8, 2.
 */
-.sc-progress-view._THEME {
-  background: sprite("progress_view_track.png" repeat-x [8, 1]);
+
+@view(sc-progress-view) {
+  background: sprite("progress_view_track.psd" repeat-x [0, 8]);
 }
 
-.sc-progress-view._THEME .inner {
+@view(sc-progress-view) .inner {
   /* If it was pre-sliced */
-  background: sprite("progress_view_content_middle.png");
+  background: sprite("progress_view_content_middle.psd");
 }
