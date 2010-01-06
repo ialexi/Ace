@@ -1,4 +1,5 @@
 /* 
+sprite(
 Syntax Notes: 
 ._theme gets replaced with the theme name.
 sprite("sprite_name") is replaced with background: and background-image settings.
@@ -7,7 +8,7 @@ sprite names are defined in the .json files.
 Think this can be pulled off?
 */
 .sc-progress-view._theme {
-  sprite("progress_view_track_middle")
+  background: sprite("progress_view_track" repeat-x [8, 1]);
 }
 
 .sc-progress-view._theme .inner {

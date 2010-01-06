@@ -5,6 +5,8 @@ Dark doesn't receive as much attention, and it shows.
 
 Build Tools
 ===========
+**Current Test**: controls/progress/progress_view
+
 I think if it were easier to really modify Ace and create all the sprites and such,
 it would be improved more often. (Perhaps it is easily updated and I am missing how?)
 
