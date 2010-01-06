@@ -38,14 +38,15 @@ However, I do not want to parse CSS.
 
 Here is a possible syntax:
 
-	{
+	@view(view-name) .more-rules {
 		/*
 		 What is the bare minimum to specify? input file, repeat (if any), and slice rectangle
 		*/
 		background: sprite("progress_view_track.png" repeat-x [12 1]);
 	}
 
-The build tools would just search for sprite(, and then parse the contents.
+The build tools would just search for sprite(, and then parse the contents, and replace @view(view-name)
+with .sc-view.view-name.theme.name (where theme.name is specified via an argument to the build tool).
 
 The syntax is:
 
