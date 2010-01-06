@@ -1,16 +1,15 @@
 /* 
-sprite(
 Syntax Notes: 
-._theme gets replaced with the theme name.
-sprite("sprite_name") is replaced with background: and background-image settings.
-sprite names are defined in the .json files.
-
-Think this can be pulled off?
+._THEME gets replaced with the theme class name.
+[8] means a rectangle starting at x=8, the whole height, to the right edge.
+[8, 1] means rectangle starting at x=8, width 1px, whole height
+[8, 2, 1, 1] means a 1x1 rectangle at 8, 2.
 */
-.sc-progress-view._theme {
-  background: sprite("progress_view_track" repeat-x [8, 1]);
+.sc-progress-view._THEME {
+  background: sprite("progress_view_track.png" repeat-x [8, 1]);
 }
 
-.sc-progress-view._theme .inner {
-  sprite("progress_view_content_middle")
+.sc-progress-view._THEME .inner {
+  /* If it was pre-sliced */
+  background: sprite("progress_view_content_middle.png");
 }
