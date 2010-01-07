@@ -168,7 +168,58 @@ class Slicer
   
   # dice seems like it should continue that, but I just named it dice for fun. It really sprites things.
   def dice
+    # way we try:
+    # the config passed to us in @config has a list of "tries".
+    # the "simple" method is tried first (and is the only one tried in debug mode)
+    # and is guaranteed to work.
+    # 
+    # Each "try" is a set of settings with which to attempt to generate a plan.
+    # The wasted space that is returned with the plan is used to determine which method to use.
+    # The spriter will usually try a double-sprite first, then a single-sprite.
+    #
+    # Here's some common plans: 1, 2, 4, 8, 16 cols/horizontal, rows/vertical.
+    tries = [
+      {:cols=>1,:direction=>:horizontal},
+      {:cols=>2,:direction=>:horizontal},
+      {:cols=>4,:direction=>:horizontal},
+      {:cols=>8,:direction=>:horizontal},
+      {:cols=>16,:direction=>:horizontal},
+      {:cols=>1,:direction=>:vertical},
+      {:cols=>2,:direction=>:vertical},
+      {:cols=>4,:direction=>:vertical},
+      {:cols=>8,:direction=>:vertical},
+      {:cols=>16,:direction=>:vertical}
+    ]
     
+    ximages = @images.select {|el| el[:repeat] == "repeat-x" }
+    yimages = @images.select {|el| el[:repeat] == "repeat-y" }
+    nimages = @images.select {|el| el[:repeat] == "no-repeat" }
+    
+    plans = []
+    tries.each {|try|
+      # we will have either 2 or three images in any case. So,
+      # we need to pick the best case: the smallest possible primary image.
+      plans << [self.plan(ximages + nimages), self.plan(yimages)]
+      plans << [self.plan(yimages + nimages), self.plan(ximages)]
+      plans << [self.plan(nimages), self.plan(ximages), self.plan(yimages)]
+      
+    }
+    
+    # sort by wasted space. The least wasted is the one we want.
+    plans.sort {|a, b|
+      total_wasted_a = 0
+      total_wasted_b = 0
+      a.each {|e| total_wasted_a += e[:wasted] }
+      b.each {|e| total_wasted_b += e[:wasted] }
+      
+      return total_wasted_a <=> total_wasted_b
+    }
+  end
+  
+  # Settings={:cols=> or :rows=>, :direction=>}
+  # Returns: {:wasted=>percent, :plan=>collection of clones of image hashes w/plan setings }
+  def plan(images, settings)
+    # algorithm
   end
 end
 
