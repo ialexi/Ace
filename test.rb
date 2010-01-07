@@ -161,14 +161,23 @@ class Slicer
       if x < 0 then x = image_width + x end
       if y < 0 then y = image_height + y end
       
+      # Crop image
       result = image.crop(x, y, width, height)
+      
+      # Write image
       print "Writing...\n"
       FileUtils.mkdir_p "output/" + File.dirname(path)
-      result.write("output/" + path + "_" + [x, y, width, height].join("_") + ".png")
+      slice_path = "output/" + path + "_" + [x, y, width, height].join("_") + ".png"
+      result.write(slice_path)
       
+      # update definition
       definition[:width] = width
       definition[:height] = height
       definition[:key] = key
+      definition[:slice] = slice_path
+      definition[:image] = result
+      
+      # add to new images collection
       image_set << definition
     end
     
@@ -214,7 +223,32 @@ class Slicer
       total_wasted_a <=> total_wasted_b
     }
     
-    pp plans[0]
+    # Best plan is plan 0.
+    planset = plans[0]
+    i = 0
+    planset.each {|plan|
+      if not (plan and plan[:width] and plan[:width] > 0)
+        next
+      end
+      target_image = Magick::Image.new(plan[:width], plan[:height])
+
+      plan[:plan].each {|image|
+        cols = image[:image].columns
+        rows = image[:image].rows
+        written_x = 0
+        written_y = 0
+        while written_y < image[:height] do
+          while written_x < image[:width] do
+            target_image.composite!(image[:image], image[:x] + written_x, image[:y] + written_y, Magick::CopyCompositeOp)
+            written_x += cols
+          end
+          written_y += rows
+        end
+      }
+      
+      i += 1
+      target_image.write("output/" + i.to_s + ".png")
+    }
   end
   
   # Settings={:direction=>}
@@ -307,7 +341,7 @@ class Slicer
       y += row_height
     end
 
-    return {:plan=>plan, :wasted=>wasted_pixels}
+    return {:plan=>plan, :width => total_width, :height => y, :wasted=>wasted_pixels}
   end
 end
 
