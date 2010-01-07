@@ -123,12 +123,14 @@ end
 # The name will be: (output)/path/to/image.png_slice_rect_here.png
 require 'RMagick'
 require 'FileUtils'
+require 'pp'
 
 class Slicer
   attr_accessor :images
   
   # slice performs the slicing operations, putting the images in the output directory
   def slice
+    image_set = []
     @images.each do |key, definition|
       path = definition[:path]
       
@@ -163,63 +165,149 @@ class Slicer
       print "Writing...\n"
       FileUtils.mkdir_p "output/" + File.dirname(path)
       result.write("output/" + path + "_" + [x, y, width, height].join("_") + ".png")
+      
+      definition[:width] = width
+      definition[:height] = height
+      definition[:key] = key
+      image_set << definition
     end
+    
+    @images = image_set
   end
   
   # dice seems like it should continue that, but I just named it dice for fun. It really sprites things.
   def dice
     # way we try:
     # the config passed to us in @config has a list of "tries".
-    # the "simple" method is tried first (and is the only one tried in debug mode)
-    # and is guaranteed to work.
     # 
     # Each "try" is a set of settings with which to attempt to generate a plan.
     # The wasted space that is returned with the plan is used to determine which method to use.
-    # The spriter will usually try a double-sprite first, then a single-sprite.
+    # The spriter will usually try a x-repeat with the normal images first, then separate.
     #
-    # Here's some common plans: 1, 2, 4, 8, 16 cols/horizontal, rows/vertical.
-    tries = [
-      {:cols=>1,:direction=>:horizontal},
-      {:cols=>2,:direction=>:horizontal},
-      {:cols=>4,:direction=>:horizontal},
-      {:cols=>8,:direction=>:horizontal},
-      {:cols=>16,:direction=>:horizontal},
-      {:cols=>1,:direction=>:vertical},
-      {:cols=>2,:direction=>:vertical},
-      {:cols=>4,:direction=>:vertical},
-      {:cols=>8,:direction=>:vertical},
-      {:cols=>16,:direction=>:vertical}
-    ]
+    # Settings work as follows: an aim parameter specifies a multiple of a) the image width
+    # b) the least common multiplier of all repeat pattern widths.
+    tries = []
+    10.times {|i| tries << {:aim=>i + 1} }
     
-    ximages = @images.select {|el| el[:repeat] == "repeat-x" }
-    yimages = @images.select {|el| el[:repeat] == "repeat-y" }
-    nimages = @images.select {|el| el[:repeat] == "no-repeat" }
+    images = @images
+    
+    ximages = images.select {|v| v[:repeat] == "repeat-x" }
+    yimages = images.select {|v| v[:repeat] == "repeat-y" }
+    nimages = images.select {|v| v[:repeat] == "no-repeat" }
     
     plans = []
     tries.each {|try|
       # we will have either 2 or three images in any case. So,
       # we need to pick the best case: the smallest possible primary image.
-      plans << [self.plan(ximages + nimages), self.plan(yimages)]
-      plans << [self.plan(yimages + nimages), self.plan(ximages)]
-      plans << [self.plan(nimages), self.plan(ximages), self.plan(yimages)]
+      plans << [self.plan(ximages + nimages, try), self.plan(yimages, try)]
+      plans << [self.plan(nimages, try), self.plan(ximages, try), self.plan(yimages, try)]
       
     }
     
     # sort by wasted space. The least wasted is the one we want.
-    plans.sort {|a, b|
+    plans.sort! {|a, b|
       total_wasted_a = 0
       total_wasted_b = 0
       a.each {|e| total_wasted_a += e[:wasted] }
       b.each {|e| total_wasted_b += e[:wasted] }
       
-      return total_wasted_a <=> total_wasted_b
+      total_wasted_a <=> total_wasted_b
     }
+    
+    pp plans[0]
   end
   
-  # Settings={:cols=> or :rows=>, :direction=>}
+  # Settings={:direction=>}
   # Returns: {:wasted=>percent, :plan=>collection of clones of image hashes w/plan setings }
+  # Wasted is the amount of a) empty space and b) extra space used by repeating patterns.
+  # The width of the image is either a) the width of the 
   def plan(images, settings)
-    # algorithm
+    # we go in direction: settings[:direction]. We sort the images first, biggest to smallest
+    # based on their directional size (i.e. width for horizontal).
+    # the first image in the sorted set is used to figure out the width or height of the image
+    # (also using the config's units prop)
+    wasted_pixels = 0
+    plan = [] # images
+    
+    # Handle no images
+    if images.length < 1
+      return {:wasted=>0, :plan=>plan}
+    end
+    
+    # sort images
+    images = images.sort {|a, b|
+      res = a[:repeat] <=> b[:repeat] # keep non-repeats together (at end).
+      if res == 0
+        res = b[:width] <=> a[:width]
+        if res == 0
+          res = b[:height] <=> a[:height] # sort these to get like ones together
+        end
+      end
+      res
+    }
+    
+    lcm = 1
+    images.each {|image|
+      if image[:repeat] == "repeat-x"
+        lcm = lcm.lcm image[:width]
+      end
+    }
+    
+    # get unit (row/col) size
+    
+    unit_size = images[0][:width]
+    unit_size = unit_size.lcm lcm
+    
+    total_width = unit_size * settings[:aim] # 1 is probably best... but we try many :)
+    
+    
+    x = 0
+    y = 0 # the current total secondary
+    row_height = 0 # the current unit secondary
+    
+    # loop through images
+    images.each {|image|
+      width = image[:width]
+      height = image[:height]
+      
+      if x + width > total_width or (image[:repeat] == "repeat-x" and x > 0)
+        # make way!
+        wasted_pixels += (total_width - x) * row_height
+        x = 0
+        y += row_height
+        row_height = 0
+      end
+      
+      img = image.dup
+      
+      # Set position
+      img[:x] = x
+      img[:y] = y
+      
+      # handle repeated images
+      if img[:repeat] == "repeat-x" then
+        img[:width] = total_width
+        wasted_pixels += (total_width - width) * height
+      else
+        img[:width] = width
+      end
+      
+      # height!
+      img[:height] = height
+      
+      # add to plan
+      plan << img
+      
+      
+      x += img[:width]
+      row_height = [row_height, height].max
+    }
+    if x > 0
+      wasted_pixels += (total_width - x) * row_height
+      y += row_height
+    end
+
+    return {:plan=>plan, :wasted=>wasted_pixels}
   end
 end
 
@@ -229,3 +317,4 @@ parser.parse
 slicer = Slicer.new
 slicer.images = parser.images
 slicer.slice
+slicer.dice

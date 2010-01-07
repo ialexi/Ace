@@ -10,10 +10,14 @@ theme-name is specified as an argument when building.
 */
 
 @view(sc-progress-view) {
-  background: sprite("progress_view_track.psd" repeat-x [0, 8]);
+  background: sprite("progress_view_track.psd" repeat-x [8, 1]);
+  background: sprite("progress_view_track.psd" repeat-x [3, 7]);
 }
 
 @view(sc-progress-view) .inner {
   /* If it was pre-sliced */
-  background: sprite("progress_view_content_middle.psd");
+  background: sprite("progress_view_track.psd" [0, 8]);
+  background: sprite("progress_view_track.psd" [8, 8]);
+  background: sprite("progress_view_track.psd" [15, 4]);
+  background: sprite("progress_view_track.psd" [19, 20]);
 }
