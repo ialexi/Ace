@@ -186,12 +186,14 @@ class Slicer
   
   # dice seems like it should continue that, but I just named it dice for fun. It really sprites things.
   def dice
-    # way we try:
-    # the config passed to us in @config has a list of "tries".
-    # 
+    # For each target, for each try, plan out normal, x-repeat, and y-repeat.
+    # Write out images for each target named target.png, target-x.png, and target-y.png.
+    
     # Each "try" is a set of settings with which to attempt to generate a plan.
-    # The wasted space that is returned with the plan is used to determine which method to use.
+    # The wasted space that is returned with the plan is used to determine which try to use.
     # The spriter will usually try a x-repeat with the normal images first, then separate.
+    # A certain amount of leeway should be given when X-repeat and normal are combined (an amount
+    # of wasted space past which it would be impractical to keep them in the same file)
     #
     # Settings work as follows: an aim parameter specifies a multiple of a) the image width
     # b) the least common multiplier of all repeat pattern widths.
@@ -237,6 +239,8 @@ class Slicer
         rows = image[:image].rows
         written_x = 0
         written_y = 0
+        
+        # loop through plan
         while written_y < image[:height] do
           while written_x < image[:width] do
             target_image.composite!(image[:image], image[:x] + written_x, image[:y] + written_y, Magick::CopyCompositeOp)
