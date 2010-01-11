@@ -1,128 +1,3 @@
-# A CSSParser object is created for every file processed. It opens the file,
-# reads its contents, and can perform two actions on it: parsing and generating.
-#
-# The parsing step reads the file and finds references to images; this causes those
-# images to be added to the object's usedImages, which is a set of images required (images
-# here being hashes with arguments specified). Ruby's "Set" functionality seems
-# to work here (I am not a ruby expert, hence 'seems')
-# 
-# Internally, it actually generates an in-memory CSS file in the parsing step,
-# to be used in the generating step—but that's all transparent. The object is long-lived,
-# staying around from initial parse step to generation.
-#
-# In my opinion, this script is not that great. This is due to two reasons: it is my very
-# first script written in Ruby, and I was figuring out the requirements by writing it (something
-# I often do, but I usually follow that with a rewrite).
-# But still, it generally works, and works with acceptable speed.
-
-require 'pathname'
-require 'set'
-
-class CSSParser
-  attr_accessor :images, :contents
-  def initialize(directory, file, theme)
-    @directory = directory
-    @file = file
-    @theme = theme
-    @images = {  }
-  end
-  
-  def parse
-    # first, read file
-    file = File.new(@directory + "/" + @file)
-    contents = ""
-    file.each {|line| contents += line}
-    @contents = contents
-    
-    self.parse_rules
-    self.parse_sprites
-  end
-  
-  def parse_rules
-    # parses @theme "name"
-    # and @view(viewname)
-    contents = @contents
-    
-    view_rule = /@view\(\s*(["']{2}|["'].*?[^\\]"|[^\s]+)\s*\)/
-    
-    theme_name = @theme
-    contents.gsub!(view_rule) do |match|
-      ".sv-view." + $1 + "." + theme_name
-    end
-    
-    @contents = contents
-  end
-  
-  def parse_sprites
-    contents = @contents
-    
-    # A whole regexp would include: ([\s,]+(repeat-x|repeat-y))?([\s,]+\[(.*)\])?
-    # but let's keep it simple:
-    sprite_directive = /sprite\(\s*(["']{2}|["'].*?[^\\]"|[^\s]+)(.*?)\s*\)/
-    contents = contents.gsub(sprite_directive) do | match |
-      # prepare replacement string
-      replace_with_prefix = "sprite_for("
-      replace_with_suffix = ")"
-      
-      # get name and add to replacement
-      image_name = $1
-      args = $2
-      image_name = $1.sub(/^["'](.*)["']$/, '\1')
-      
-      result_hash = { 
-        :path => @directory + "/" + image_name, :image => image_name,
-        :repeat => "no-repeat", :rect => [], :target => ""
-      }
-      
-      # Replacement string is made to be replaced again in a second pass
-      # first pass generates manifest, second pass actually puts sprite info in.
-      
-      # match: key words (Separated by whitespace) or rects.
-      args.scan(/(\[.*?\]|[^\s]+)/) {|r|
-        arg = $1.strip
-        if arg.match(/^\[/)
-          # A rectangle specifying a slice
-          full_rect = []
-          params = arg.gsub(/^\[|\]$/, "").split(/[,\s]+/)
-          if params.length == 1
-            full_rect = [params[0].to_i, 0, 0, 0]
-          elsif params.length == 2
-            full_rect = [params[0].to_i, 0, params[1].to_i, 0]
-          elsif params.length == 4
-            full_rect = params
-          else
-            
-          end
-          
-          result_hash[:rect] = full_rect
-        else
-          # a normal keyword, probably.
-          if arg == "repeat-x"
-            replace_with_suffix << " repeat-x"
-            result_hash[:repeat] = "repeat-x"
-          elsif arg == "repeat-y"
-            replace_with_suffix << " repeat-y"
-            result_hash[:repeat] = "repeat-y"
-          end
-        end
-      }
-      
-      image_key = result_hash[:repeat] + ":" + result_hash[:rect].join(",") + ":" + result_hash[:path]
-      replace_with = replace_with_prefix + image_key + replace_with_suffix
-      @images[image_key] = result_hash
-      
-      replace_with
-    end
-    
-    @contents = contents
-  end
-  
-  def generate
-    
-  end
-end
-
-
 # The Slicer object takes a set of images and slices them as needed, producing a set of images
 # located in a hierarchy (for debugging purposes) in the output directory.
 # The name will be: (output)/path/to/image.png_slice_rect_here.png
@@ -132,6 +7,10 @@ require 'pp'
 
 class Slicer
   attr_accessor :images
+  
+  def initialize(config)
+    @output_dir = config[:output]
+  end
   
   # slice performs the slicing operations, putting the images in the output directory
   def slice
@@ -170,9 +49,8 @@ class Slicer
       result = image.crop(x, y, width, height)
       
       # Write image
-      print "Writing...\n"
-      FileUtils.mkdir_p "output/" + File.dirname(path)
-      slice_path = "output/" + path + "_" + [x, y, width, height].join("_") + ".png"
+      FileUtils.mkdir_p @output_dir + "slices/" + File.dirname(path)
+      slice_path = @output_dir + "slices/" + path + "_" + [x, y, width, height].join("_") + ".png"
       result.write(slice_path)
       
       # update definition
@@ -186,7 +64,7 @@ class Slicer
       image_set << definition
     end
     
-    @images = image_set
+    @image_list = image_set
   end
   
   # dice seems like it should continue that, but I just named it dice for fun. It really sprites things.
@@ -205,7 +83,7 @@ class Slicer
     tries = []
     10.times {|i| tries << {:aim=>i + 1} }
     
-    images = @images
+    images = @image_list
     
     ximages = images.select {|v| v[:repeat] == "repeat-x" }
     yimages = images.select {|v| v[:repeat] == "repeat-y" }
@@ -232,19 +110,32 @@ class Slicer
     
     # Best plan is plan 0.
     planset = plans[0]
+    new_image_hash = {}
     total_wasted = 0
     i = 0
+    
+    FileUtils.mkdir_p @output_dir + "images/"
     planset.each {|plan|
       if not (plan and plan[:width] and plan[:width] > 0)
         next
       end
-      target_image = Magick::Image.new(plan[:width], plan[:height])
+      target_image = Magick::Image.new(plan[:width], plan[:height]) {
+        self.background_color = "transparent"
+      }
 
+      i += 1
+      filename =  i.to_s + ".png"
+      
       plan[:plan].each {|image|
         cols = image[:image].columns
         rows = image[:image].rows
         written_x = 0
         written_y = 0
+        
+        image[:sprite_path] = "images/" + filename
+        image[:sprite_x] = image[:x] # just to be as specific as possible
+        image[:sprite_y] = image[:y]
+        new_image_hash[image[:key]] = image
         
         # loop through plan
         while written_y < image[:height] do
@@ -256,12 +147,12 @@ class Slicer
         end
       }
       
-      i += 1
-      target_image.write("output/" + i.to_s + ".png")
+      target_image.write(@output_dir + "images/" + filename)
       total_wasted += plan[:wasted]
     }
     
     print "Wasted pixels: ", total_wasted, "\n"
+    @images = new_image_hash
   end
   
   # Plan the y-repeat images
@@ -410,21 +301,3 @@ class Slicer
     return {:plan=>plan, :width => total_width, :height => y, :wasted=>wasted_pixels}
   end
 end
-
-require 'find'
-images = {}
-parsers = []
-Find.find('./') do |f|
-  if f =~ /\.css$/
-    parser = CSSParser.new(File.dirname(f), File.basename(f), "ace.light")
-    parsers << parser
-    parser.parse
-    images.merge! parser.images
-  end
-end
-
-slicer = Slicer.new
-slicer.images = images
-slicer.slice
-slicer.dice
-
