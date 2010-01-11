@@ -9,6 +9,11 @@
 # Internally, it actually generates an in-memory CSS file in the parsing step,
 # to be used in the generating step—but that's all transparent. The object is long-lived,
 # staying around from initial parse step to generation.
+#
+# In my opinion, this script is not that great. This is due to two reasons: it is my very
+# first script written in Ruby, and I was figuring out the requirements by writing it (something
+# I often do, but I usually follow that with a rewrite).
+# But still, it generally works, and works with acceptable speed.
 
 require 'pathname'
 require 'set'
@@ -210,8 +215,8 @@ class Slicer
     tries.each {|try|
       # we will have either 2 or three images in any case. So,
       # we need to pick the best case: the smallest possible primary image.
-      plans << [self.plan(ximages + nimages, try), self.plan(yimages, try)]
-      plans << [self.plan(nimages, try), self.plan(ximages, try), self.plan(yimages, try)]
+      plans << [self.plan(ximages + nimages, try), self.yplan(yimages)]
+      plans << [self.plan(nimages, try), self.plan(ximages, try), self.yplan(yimages)]
       
     }
     
@@ -227,6 +232,7 @@ class Slicer
     
     # Best plan is plan 0.
     planset = plans[0]
+    total_wasted = 0
     i = 0
     planset.each {|plan|
       if not (plan and plan[:width] and plan[:width] > 0)
@@ -252,7 +258,66 @@ class Slicer
       
       i += 1
       target_image.write("output/" + i.to_s + ".png")
+      total_wasted += plan[:wasted]
     }
+    
+    print "Wasted pixels: ", total_wasted, "\n"
+  end
+  
+  # Plan the y-repeat images
+  def yplan(images)
+    # we go in direction: settings[:direction]. We sort the images first, biggest to smallest
+    # based on their directional size (i.e. width for horizontal).
+    # the first image in the sorted set is used to figure out the width or height of the image
+    # (also using the config's units prop)
+    wasted_pixels = 0
+    plan = [] # images
+    
+    # Handle no images
+    if images.length < 1
+      return {:wasted=>0, :plan=>plan}
+    end
+    
+    # sort images
+    images = images.sort {|a, b|
+      b[:width] <=> a[:width]
+    }
+    
+    lcm = 1
+    images.each {|image|
+      lcm = lcm.lcm image[:height]
+    }
+    
+    
+    x = 0
+    total_height = lcm
+    
+    # loop through images
+    images.each {|image|
+      width = image[:width]
+      height = image[:height]
+            
+      img = image.dup
+      
+      # Set position
+      img[:x] = x
+      img[:y] = 0
+      
+      # handle repeated images
+      img[:height] = total_height
+      wasted_pixels += (total_height - height) * width
+      
+      # width!
+      img[:width] = width
+      
+      # add to plan
+      plan << img
+      
+      
+      x += img[:width]
+    }
+
+    return {:plan=>plan, :width => x, :height => total_height, :wasted=>wasted_pixels}
   end
   
   # Settings={:direction=>}
@@ -260,10 +325,7 @@ class Slicer
   # Wasted is the amount of a) empty space and b) extra space used by repeating patterns.
   # The width of the image is either a) the width of the 
   def plan(images, settings)
-    # we go in direction: settings[:direction]. We sort the images first, biggest to smallest
-    # based on their directional size (i.e. width for horizontal).
     # the first image in the sorted set is used to figure out the width or height of the image
-    # (also using the config's units prop)
     wasted_pixels = 0
     plan = [] # images
     
@@ -349,10 +411,20 @@ class Slicer
   end
 end
 
-parser = CSSParser.new("controls/progress/progress_view", "progress_view.css", "ace.light")
-parser.parse
+require 'find'
+images = {}
+parsers = []
+Find.find('./') do |f|
+  if f =~ /\.css$/
+    parser = CSSParser.new(File.dirname(f), File.basename(f), "ace.light")
+    parsers << parser
+    parser.parse
+    images.merge! parser.images
+  end
+end
 
 slicer = Slicer.new
-slicer.images = parser.images
+slicer.images = images
 slicer.slice
 slicer.dice
+
