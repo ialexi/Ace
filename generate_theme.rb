@@ -26,15 +26,15 @@ config = {}
 argparser = OptionParser.new {|opts|
   opts.banner = "Usage: ruby generate_theme.rb [options] theme.name"
   
-  config[:output] = "output/"
-  opts.on('-o', '--output', 'Set output path (default: output/)') {|out|
+  config[:output] = "resources/"
+  opts.on('-o', '--output', 'Set output path (default: resources/)') {|out|
     out += "." if out.length == 0
     out += "/" if out[out.length - 1] != '/'
     config[:output] = out
   }
   
-  config[:url_template] = "static_url(%s)"
-  opts.on('-u', '--url', 'The URL template (default: static_url(%s) )') {|out|
+  config[:url_template] = "static_url(\"%s\")"
+  opts.on('-u', '--url', 'The URL template (default: static_url(\"%s\") )') {|out|
     config[:output] = out
   }
 }
@@ -52,7 +52,7 @@ require 'find'
 images = {}
 parsers = []
 Find.find('./') do |f|
-  if f =~ /^\.\/(output)|\/\./
+  if f =~ /^\.\/(resources)|\/\./
     Find.prune
   end
   if f =~ /\.css$/
@@ -74,4 +74,4 @@ parsers.each {|parser|
   css_code += parser.generate
 }
 
-File.open(config[:output] + "theme.css", "w") {|f| f.write(css_code) }
+File.open(config[:output] + "theme.css", File::WRONLY|File::TRUNC|File::CREAT) {|f| f.write(css_code) }

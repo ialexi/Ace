@@ -30,7 +30,8 @@ class CSSParser
     
     theme_name = @theme
     contents.gsub!(view_rule) do |match|
-      ".sv-view." + $1 + "." + theme_name
+      #".sc-view." + $1 + "." + theme_name # If SproutCore changes some
+      ".sc-theme .sc-view." + $1
     end
     
     @contents = contents
@@ -107,7 +108,7 @@ class CSSParser
       result = ""
       if @images.key? key
         image = @images[key]
-        result = (@config[:url_template] % [image[:sprite_path]]) + " -" + image[:sprite_x].to_s + " -" + image[:sprite_y].to_s
+        result = (@config[:url_template] % [image[:sprite_path]]) + " -" + image[:sprite_x].to_s + "px -" + image[:sprite_y].to_s + "px"
       else
         puts "Did not find image with key: ", key
       end
