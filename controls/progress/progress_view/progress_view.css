@@ -9,11 +9,64 @@ theme-name is specified as an argument when building.
 [8, 2, 1, 1] means a 1x1 rectangle at 8, 2.
 */
 
+/* Track */
 @view(sc-progress-view) {
-  background: sprite("progress_view_track.psd" repeat-x [8, 1]);
+  /* If it was pre-sliced */
+  background: sprite("progress_view_track.psd" [0, 8]) no-repeat;
+  z-index:0;
+  border:0px none;
 }
 
+@view(sc-progress-view) .sc-outer-head {
+  left: 8px;
+  right: 8px;
+  position:absolute;
+  height:20px;
+  background: sprite("progress_view_track.psd" repeat-x [8, 1]);
+  z-index:0;
+  border:0px none;
+}
+
+@view(sc-progress-view) .sc-outer-tail {
+  right: 0px;
+  width: 8px;
+  position:absolute;
+  height:20px;
+  background: sprite("progress_view_track.psd" [-8]);
+  z-index:0;
+  border:0px none;
+}
+
+
+
+/* Inner */
 @view(sc-progress-view) .sc-inner {
-  /* If it was pre-sliced */
+  background: sprite("progress_view_content.psd" no-repeat [0, 8]) no-repeat;
+  z-index:1;
+  border:0px none;
+}
+
+@view(sc-progress-view) .sc-inner-head {
+  left: 8px;
+  right: 0px;
+  position:absolute;
+  height:20px;
+  background: sprite("progress_view_content.psd" anchor-right [-8]);
+  z-index:1;
+  border:0px none;
+}
+
+@view(sc-progress-view) .sc-inner-tail {
+  left: 8px;
+  right: 8px;
+  position:absolute;
+  height:20px;
   background: sprite("progress_view_content.psd" repeat-x [8, 1]);
+  z-index:1;
+  border:0px none;
+}
+
+/* Disabled */
+@view(sc-progress-view).disabled {
+  opacity:.5;
 }

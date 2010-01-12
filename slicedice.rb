@@ -40,10 +40,10 @@ class Slicer
       image = images[0]
       
       image_width, image_height = image.columns, image.rows
-      if width == 0 then width = image_width end
-      if height == 0 then height = image_height end
       if x < 0 then x = image_width + x end
       if y < 0 then y = image_height + y end
+      if width == 0 then width = image_width - x end
+      if height == 0 then height = image_height - y end
       
       # Crop image
       result = image.crop(x, y, width, height)
@@ -81,7 +81,7 @@ class Slicer
     # Settings work as follows: an aim parameter specifies a multiple of a) the image width
     # b) the least common multiplier of all repeat pattern widths.
     tries = []
-    10.times {|i| tries << {:aim=>i + 1} }
+    10.times {|i| tries << {:aim=>i + 3} }
     
     images = @image_list
     
@@ -104,7 +104,6 @@ class Slicer
       total_wasted_b = 0
       a.each {|e| total_wasted_a += e[:wasted] }
       b.each {|e| total_wasted_b += e[:wasted] }
-      
       total_wasted_a <=> total_wasted_b
     }
     
@@ -141,9 +140,9 @@ class Slicer
         while written_y < image[:height] do
           while written_x < image[:width] do
             target_image.composite!(image[:image], image[:x] + written_x, image[:y] + written_y, Magick::CopyCompositeOp)
-            written_x += cols
+            written_x += [cols, image[:width]].min
           end
-          written_y += rows
+          written_y += [rows, image[:height]].min
         end
       }
       
@@ -227,7 +226,7 @@ class Slicer
     
     # sort images
     images = images.sort {|a, b|
-      res = a[:repeat] <=> b[:repeat] # keep non-repeats together (at end).
+      res = b[:repeat] <=> a[:repeat] # keep non-repeats together (at begin).
       if res == 0
         res = b[:width] <=> a[:width]
         if res == 0
@@ -237,67 +236,99 @@ class Slicer
       res
     }
     
+    # Select images
+    normal_images = images.select {|i|
+      i[:anchor] == :none
+    }
+    anchor_left_images = images.select {|i|
+      i[:anchor] == :left
+    }
+    anchor_right_images = images.select {|i|
+      i[:anchor] == :right
+    }
+    
+    max = 0
     lcm = 1
     images.each {|image|
+      max = [max, image[:width]].max
       if image[:repeat] == "repeat-x"
         lcm = lcm.lcm image[:width]
       end
     }
     
     # get unit (row/col) size
-    
-    unit_size = images[0][:width]
+    unit_size = max
     unit_size = unit_size.lcm lcm
     
     total_width = unit_size * settings[:aim] # 1 is probably best... but we try many :)
-    
-    
     x = 0
     y = 0 # the current total secondary
-    row_height = 0 # the current unit secondary
     
-    # loop through images
-    images.each {|image|
-      width = image[:width]
-      height = image[:height]
+    # loop through images. Each iteration represents a single row.
+    while normal_images.length > 0 or anchor_left_images.length > 0 or anchor_right_images.length > 0
+      x = 0
+      row_height = 0
+      row_space = total_width
       
-      if x + width > total_width or (image[:repeat] == "repeat-x" and x > 0)
-        # make way!
-        wasted_pixels += (total_width - x) * row_height
-        x = 0
-        y += row_height
-        row_height = 0
-      end
-      
-      img = image.dup
-      
-      # Set position
-      img[:x] = x
-      img[:y] = y
-      
-      # handle repeated images
-      if img[:repeat] == "repeat-x" then
+      # Very first thing: handle repeat-x
+      if normal_images.length > 0 and normal_images[0][:repeat] == "repeat-x"
+        img = normal_images.shift.dup
+        normal_width = img[:width]
         img[:width] = total_width
-        wasted_pixels += (total_width - width) * height
-      else
-        img[:width] = width
+        img[:x] = 0
+        img[:y] = y
+        plan << img
+        
+        wasted_pixels += total_width - normal_width
+        row_space = 0
+        row_height = img[:height]
+      end
+
+      # fit in anchor left first, if any
+      left = anchor_left_images.shift
+      if left
+        left = left.dup
+        left[:x] = 0
+        left[:y] = y
+        plan << left
+        x += left[:width]
+        row_height = [row_height, left[:height]].max
+        
+        row_space -= left[:width]
       end
       
-      # height!
-      img[:height] = height
+      # now anchor right
+      right = anchor_right_images[0]
+      if right and right[:width] <= row_space
+        right = anchor_right_images.shift
+        right = right.dup
+        right[:x] = total_width - right[:width]
+        right[:y] = y
+        plan << right
+        row_height = [row_height, right[:height]].max
+        
+        row_space -= right[:width]
+      end
       
-      # add to plan
-      plan << img
+      while normal_images.length > 0 and normal_images[0][:repeat] != "repeat-x" and normal_images[0][:width] <= row_space
+        img = normal_images.shift.dup
       
+        # Set position
+        img[:x] = x
+        img[:y] = y
       
-      x += img[:width]
-      row_height = [row_height, height].max
-    }
-    if x > 0
-      wasted_pixels += (total_width - x) * row_height
+        # add to plan
+        plan << img
+        
+        x += img[:width]
+        row_space -= img[:width]
+        row_height = [row_height, img[:height]].max
+      end
+      
+      wasted_pixels += row_height * row_space
       y += row_height
     end
-
+    
     return {:plan=>plan, :width => total_width, :height => y, :wasted=>wasted_pixels}
   end
 end
