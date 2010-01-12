@@ -81,7 +81,7 @@ class Slicer
     # Settings work as follows: an aim parameter specifies a multiple of a) the image width
     # b) the least common multiplier of all repeat pattern widths.
     tries = []
-    10.times {|i| tries << {:aim=>i + 3} }
+    10.times {|i| tries << {:aim=>i + 1} }
     
     images = @image_list
     
@@ -244,7 +244,7 @@ class Slicer
       i[:anchor] == :left
     }
     anchor_right_images = images.select {|i|
-      i[:anchor] == :right
+      i[:anchor] == :right or i[:clear]
     }
     
     max = 0
@@ -285,16 +285,19 @@ class Slicer
       end
 
       # fit in anchor left first, if any
-      left = anchor_left_images.shift
-      if left
+      left = anchor_left_images[0]
+      if left and left[:width] <= row_space
+        left = anchor_left_images.shift
         left = left.dup
         left[:x] = 0
         left[:y] = y
         plan << left
-        x += left[:width]
-        row_height = [row_height, left[:height]].max
         
+        x += left[:width]        
+        row_height = [row_height, left[:height]].max
         row_space -= left[:width]
+        
+        row_space = 0 if left[:clear]
       end
       
       # now anchor right
@@ -305,8 +308,8 @@ class Slicer
         right[:x] = total_width - right[:width]
         right[:y] = y
         plan << right
-        row_height = [row_height, right[:height]].max
         
+        row_height = [row_height, right[:height]].max
         row_space -= right[:width]
       end
       
@@ -322,6 +325,7 @@ class Slicer
         
         x += img[:width]
         row_space -= img[:width]
+        row_space = 0 if img[:clear]
         row_height = [row_height, img[:height]].max
       end
       

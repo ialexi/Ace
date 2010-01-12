@@ -50,11 +50,14 @@ with .sc-view.view-name.theme.name (where theme.name is specified via an argumen
 
 The syntax is:
 
-	sprite(<sprite name> [<repeat method>] [<anchor method>] [<rect or partial rect>])
+	sprite(<sprite name> [<repeat method>] [clear] [<anchor method>] [<rect or partial rect>])
 	
 	Sprite name: 		the name of the image (quotes required only for images with spaces)
 	
 	Repeat Method:		repeat-x or repeat-y
+	
+	clear:				Whether to ensure there are no more images on the row after this one.
+						Use with anchor-left to ensure a lonely item.
 	
 	Anchor Method:		anchor-left or anchor-right (forces the image to be on left or right side of image;
 						see below)

@@ -56,7 +56,7 @@ class CSSParser
       result_hash = { 
         :path => @directory + "/" + image_name, :image => image_name,
         :repeat => "no-repeat", :rect => [], :target => "",
-        :anchor => :none
+        :anchor => :none, :clear => false
       }
       
       # Replacement string is made to be replaced again in a second pass
@@ -83,15 +83,15 @@ class CSSParser
         else
           # a normal keyword, probably.
           if arg == "repeat-x"
-            replace_with_suffix << " repeat-x"
             result_hash[:repeat] = "repeat-x"
           elsif arg == "repeat-y"
-            replace_with_suffix << " repeat-y"
             result_hash[:repeat] = "repeat-y"
           elsif arg == "anchor-right"
             result_hash[:anchor] = :right
           elsif arg == "anchor-left"
             result_hash[:anchor] = :left
+          elsif arg == "clear"
+            result_hash[:clear] = true
           end
         end
       }
@@ -122,6 +122,7 @@ class CSSParser
         end
         
         result += " -" + image[:sprite_y].to_s + "px"
+        result += " " + image[:repeat]
       else
         puts "Did not find image with key: ", key
       end

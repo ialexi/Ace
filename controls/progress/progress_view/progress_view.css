@@ -9,10 +9,15 @@ theme-name is specified as an argument when building.
 [8, 2, 1, 1] means a 1x1 rectangle at 8, 2.
 */
 
+.sc-main {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ddd));
+  height: 100%;
+}
+
 /* Track */
 @view(sc-progress-view) {
-  /* If it was pre-sliced */
-  background: sprite("progress_view_track.psd" [0, 8]) no-repeat;
+  /* anchor right so noise won't show below rounded corners of right piece */
+  background: sprite("progress_view_track.psd" clear [0, 8]);
   z-index:0;
   border:0px none;
 }
@@ -41,7 +46,7 @@ theme-name is specified as an argument when building.
 
 /* Inner */
 @view(sc-progress-view) .sc-inner {
-  background: sprite("progress_view_content.psd" no-repeat [0, 8]) no-repeat;
+  background: sprite("progress_view_content.psd" clear [0, 8]);
   z-index:1;
   border:0px none;
 }
