@@ -17,7 +17,7 @@ theme-name is specified as an argument when building.
 /* Track */
 @view(sc-progress-view) {
   /* anchor right so noise won't show below rounded corners of right piece */
-  background: sprite("progress_view_track.psd" clear [0, 8]);
+  background: sprite("progress_view_track.png" clear [0, 8]);
   z-index:0;
   border:0px none;
 }
@@ -27,7 +27,7 @@ theme-name is specified as an argument when building.
   right: 8px;
   position:absolute;
   height:20px;
-  background: sprite("progress_view_track.psd" repeat-x [8, 1]);
+  background: sprite("progress_view_track.png" repeat-x [8, 1]);
   z-index:0;
   border:0px none;
 }
@@ -37,7 +37,7 @@ theme-name is specified as an argument when building.
   width: 8px;
   position:absolute;
   height:20px;
-  background: sprite("progress_view_track.psd" [-8]);
+  background: sprite("progress_view_track.png" [-8]);
   z-index:0;
   border:0px none;
 }
@@ -46,7 +46,7 @@ theme-name is specified as an argument when building.
 
 /* Inner */
 @view(sc-progress-view) .sc-inner {
-  background: sprite("progress_view_content.psd" clear [0, 8]);
+  background: sprite("progress_view_content.png" clear [0, 8]);
   z-index:1;
   border:0px none;
 }
@@ -56,7 +56,7 @@ theme-name is specified as an argument when building.
   right: 0px;
   position:absolute;
   height:20px;
-  background: sprite("progress_view_content.psd" anchor-right [-8]);
+  background: sprite("progress_view_content.png" anchor-right [-8]);
   z-index:1;
   border:0px none;
 }
@@ -66,7 +66,7 @@ theme-name is specified as an argument when building.
   right: 8px;
   position:absolute;
   height:20px;
-  background: sprite("progress_view_content.psd" repeat-x [8, 1]);
+  background: sprite("progress_view_content.png" repeat-x [8, 1]);
   z-index:1;
   border:0px none;
 }
