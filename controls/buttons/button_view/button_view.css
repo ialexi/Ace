@@ -21,3 +21,38 @@
   padding-top:1px;
   background: sprite("normal_button.png" repeat-x [8, 1]);
 }
+
+/* Selected */
+@view(sc-button-view).sel {
+  background: sprite("selected_button.png" clear [0 8]);
+  color: #eee;
+  text-shadow: 0px 1px 1px black;
+}
+
+@view(sc-button-view).sel .sc-button-inner {
+  background: sprite("selected_button.png" anchor-right [-8]);
+}
+
+@view(sc-button-view).sel .sc-button-label {
+  background: sprite("selected_button.png" repeat-x [8, 1]);
+}
+
+/* Disabled */
+@view(sc-button-view).disabled {
+  opacity: .5;
+}
+
+/* Active */
+@view(sc-button-view).active {
+  background: sprite("active_button.png" clear [0 8]);
+  color: #eee;
+  text-shadow: 0px 1px 1px black;
+}
+
+@view(sc-button-view).active .sc-button-inner {
+  background: sprite("active_button.png" anchor-right [-8]);
+}
+
+@view(sc-button-view).active .sc-button-label {
+  background: sprite("active_button.png" repeat-x [8, 1]);
+}
