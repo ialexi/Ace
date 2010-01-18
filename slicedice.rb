@@ -313,6 +313,36 @@ class Slicer
         row_space -= right[:width]
       end
       
+      # Find first (largest) image that will fit
+      put_any = false
+      processed = []
+      normal_images.each {|e|
+        # skip those that can't fit
+        if e[:repeat] == "repeat-x" or e[:width] > row_space
+          next
+        end
+        
+        # Get image
+        processed.push(e)
+        img = e.dup
+      
+        # Set position
+        img[:x] = x
+        img[:y] = y
+      
+        # add to plan
+        plan << img
+        
+        x += img[:width]
+        row_space -= img[:width]
+        row_space = 0 if img[:clear]
+        row_height = [row_height, img[:height]].max
+        
+        # If there isn't ANY space, just stop.
+        break if row_space == 0
+      }
+      processed.each {|e| normal_images.delete(e) }
+      
       while normal_images.length > 0 and normal_images[0][:repeat] != "repeat-x" and normal_images[0][:width] <= row_space
         img = normal_images.shift.dup
       
