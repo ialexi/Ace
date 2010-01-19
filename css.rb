@@ -74,7 +74,7 @@ class CSSParser
           elsif params.length == 2
             full_rect = [params[0].to_i, 0, params[1].to_i, 0]
           elsif params.length == 4
-            full_rect = params
+            full_rect = params.map {|e| e.to_i}
           else
             
           end
