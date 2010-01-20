@@ -27,8 +27,9 @@
 /* Selected */
 @view(sc-button-view).sel {
   background: sprite("selected_button.png" clear [0 8]);
-  color: #0d134f;
-  text-shadow: 0px 1px 1px rgba(255, 255, 255, .7);
+  color: #d5dde9;
+  font-weight:200;
+  text-shadow: 0px -1px 1px rgba(0,0,0,.7);
 }
 
 @view(sc-button-view).sel .sc-button-inner {

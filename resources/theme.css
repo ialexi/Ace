@@ -1,0 +1,206 @@
+.sc-theme .sc-view.sc-toolbar-view {
+  background: static_url("images/2.png") -0px -0px repeat-x;
+  color: #555;
+  text-shadow: 0px 1px 1px white;
+  border-bottom: 1px solid #999;
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
+  z-index: 10;
+}/* 
+Syntax Notes: 
+.sc-theme .sc-view.view-name is replaced with .sc-view.view-name.theme-name
+
+theme-name is specified as an argument when building.
+
+[8] means a rectangle starting at x=8, the whole height, to the right edge.
+[8, 1] means rectangle starting at x=8, width 1px, whole height
+[8, 2, 1, 1] means a 1x1 rectangle at 8, 2.
+*/
+
+/* Track */
+.sc-theme .sc-view.sc-progress-view {
+  /* anchor right so noise won't show below rounded corners of right piece */
+  background: static_url("images/1.png") -8px -184px no-repeat;
+  z-index:0;
+  border:0px none;
+}
+
+.sc-theme .sc-view.sc-progress-view .sc-outer-head {
+  left: 8px;
+  right: 8px;
+  position:absolute;
+  height:20px;
+  background: static_url("images/2.png") -0px -136px repeat-x;
+  z-index:0;
+  border:0px none;
+}
+
+.sc-theme .sc-view.sc-progress-view .sc-outer-tail {
+  right: 0px;
+  width: 8px;
+  position:absolute;
+  height:20px;
+  background: static_url("images/1.png") -0px -96px no-repeat;
+  z-index:0;
+  border:0px none;
+}
+
+
+
+/* Inner */
+.sc-theme .sc-view.sc-progress-view .sc-inner {
+  background: static_url("images/1.png") -8px -164px no-repeat;
+  z-index:1;
+  border:0px none;
+}
+
+.sc-theme .sc-view.sc-progress-view .sc-inner-head {
+  left: 8px;
+  right: 0px;
+  position:absolute;
+  height:20px;
+  background: static_url("images/1.png") right -144px no-repeat;
+  z-index:1;
+  border:0px none;
+}
+
+.sc-theme .sc-view.sc-progress-view .sc-inner-tail {
+  left: 8px;
+  right: 8px;
+  position:absolute;
+  height:20px;
+  background: static_url("images/2.png") -0px -156px repeat-x;
+  z-index:1;
+  border:0px none;
+}
+
+/* Disabled */
+.sc-theme .sc-view.sc-progress-view.disabled {
+  opacity:.5;
+}
+.sc-theme .sc-view.sc-checkbox-view {
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+.sc-theme .sc-view.sc-checkbox-view .label {
+  position: absolute;
+  left: 20px;
+  line-height: 18px;
+}
+
+/* Unchecked */
+.sc-theme .sc-view.sc-checkbox-view span.button {
+  background: static_url("images/1.png") -0px -252px no-repeat;
+  width: 16px;
+  height:16px;
+  position:absolute;
+  margin-right: ;
+}
+
+.sc-theme .sc-view.sc-checkbox-view.sel input {
+  visibility: hidden;
+}
+
+/* Checked */
+.sc-theme .sc-view.sc-checkbox-view.sel span.button {
+  background: static_url("images/1.png") -0px -236px no-repeat;
+}
+
+/* Active */
+.sc-theme .sc-view.sc-checkbox-view.active span.button {
+  background: static_url("images/1.png") -0px -220px no-repeat;
+}
+
+.sc-theme .sc-view.sc-checkbox-view.sel.active span.button {
+  background: static_url("images/1.png") -0px -204px no-repeat;
+}
+
+/* Disabled */
+.sc-theme .sc-view.sc-checkbox-view.disabled {
+  opacity: .5;
+}.sc-theme .sc-view.sc-button-view {
+  background: static_url("images/1.png") -8px -96px no-repeat;
+  border: 0px none;
+  color: #555;
+  text-shadow: 0px 1px 1px white;
+  -webkit-box-shadow: 0px 1px 1px rgba(255, 255, 255, .7);
+  -webkit-border-radius:5px;
+}
+
+.sc-theme .sc-view.sc-button-view .sc-button-inner {
+  position:absolute;
+  left: 8px;
+  right: 0px;
+  height: 24px;
+  background: static_url("images/1.png") right -72px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view .sc-button-label {
+  position:absolute;
+  left: 0px;
+  right: 8px;
+  height: 24px;
+  padding-top:1px;
+  background: static_url("images/2.png") -0px -64px repeat-x;
+}
+
+/* Selected */
+.sc-theme .sc-view.sc-button-view.sel {
+  background: static_url("images/1.png") -0px -0px no-repeat;
+  color: #d5dde9;
+  font-weight:200;
+  text-shadow: 0px -1px 1px rgba(0,0,0,.7);
+}
+
+.sc-theme .sc-view.sc-button-view.sel .sc-button-inner {
+  background: static_url("images/1.png") right -24px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view.sel .sc-button-label {
+  background: static_url("images/2.png") -0px -112px repeat-x;
+}
+
+/* Disabled */
+.sc-theme .sc-view.sc-button-view.disabled {
+  opacity: .5;
+}
+
+/* Active */
+.sc-theme .sc-view.sc-button-view.active {
+  background: static_url("images/1.png") -8px -48px no-repeat;
+  color: #333;
+  text-shadow: 0px 1px 1px white;
+}
+
+.sc-theme .sc-view.sc-button-view.active .sc-button-inner {
+  background: static_url("images/1.png") right -120px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view.active .sc-button-label {
+  background: static_url("images/2.png") -0px -88px repeat-x;
+}.sc-theme .sc-view.sc-split-divider-view {
+  background: #555;
+  border: 0px none;
+}.sc-theme .sc-view.sc-collection-view.sc-source-list {
+  background: #d0dae3;
+}
+
+.sc-theme .sc-view.sc-collection-view.sc-source-list .sc-collection-item.sel {
+  background: static_url("images/2.png") -0px -32px repeat-x;
+  border-top: 1px solid #43638d;
+  border-bottom: 1px solid #43638d;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0px 1px 1px black;
+}
+
+.sc-theme .sc-view.sc-collection-view.sc-source-list .sc-collection-item.sc-group-item {
+  font-weight: bold;
+  color: #4a4a4a;
+  text-shadow: 0px 1px 1px white;
+  font-size:12px;
+}.sc-main {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#bbb));
+  height: 100%;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, sans-serif;
+}
