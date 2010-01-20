@@ -1,8 +1,10 @@
 @view(sc-button-view) {
   background: sprite("normal_button.png" clear [0 8]);
   border: 0px none;
-  color: #333;
+  color: #555;
   text-shadow: 0px 1px 1px white;
+  -webkit-box-shadow: 0px 1px 1px rgba(255, 255, 255, .7);
+  -webkit-border-radius:5px;
 }
 
 @view(sc-button-view) .sc-button-inner {
@@ -25,8 +27,8 @@
 /* Selected */
 @view(sc-button-view).sel {
   background: sprite("selected_button.png" clear [0 8]);
-  color: #eee;
-  text-shadow: 0px 1px 1px black;
+  color: #0d134f;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, .7);
 }
 
 @view(sc-button-view).sel .sc-button-inner {
@@ -45,8 +47,8 @@
 /* Active */
 @view(sc-button-view).active {
   background: sprite("active_button.png" clear [0 8]);
-  color: #eee;
-  text-shadow: 0px 1px 1px black;
+  color: #333;
+  text-shadow: 0px 1px 1px white;
 }
 
 @view(sc-button-view).active .sc-button-inner {

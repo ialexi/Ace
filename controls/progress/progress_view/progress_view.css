@@ -9,11 +9,6 @@ theme-name is specified as an argument when building.
 [8, 2, 1, 1] means a 1x1 rectangle at 8, 2.
 */
 
-.sc-main {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ddd));
-  height: 100%;
-}
-
 /* Track */
 @view(sc-progress-view) {
   /* anchor right so noise won't show below rounded corners of right piece */
