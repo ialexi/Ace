@@ -4,17 +4,17 @@ Dark doesn't receive as much attention, and it shows.
 
 Build Tools
 ===========
-**Current Test**: controls/progress/progress_view
-
 I think if it were easier to really modify Ace and create all the sprites and such,
 it would be improved more often. (Perhaps it is easily updated and I am missing how?)
 
-A build tool which does not yet exist (but which maybe I can create with Ruby and
-some library; RMagick, perhaps?) would be run using a command, or possibly as part
-of SproutCore's own build tools.
+I have created a little build tool which you can run with:
 
-The operation would work on a single "theme folder", and create one CSS file and a
-handful of image files out of all of the individual CSS and image files.
+	ruby generate_theme.rb ace.light
+
+The tool requires RMagick, which, unfortunately, is a bit of a pain to install.
+
+The operation works inside the theme folder, and generates the "resources" folder used
+by SproutCore. There are various options that can be seen by calling with the --help argument.
 
 The theme packaging operation is recursive (much like SproutCore's build tools), so
 any folder depth may be used. The suggested folder layout is this:
@@ -31,9 +31,9 @@ could reference "progress\_view.png".
 CSS Syntax
 ----------
 Normal CSS won't work too well for accessing Sprites. It will work even less when
-you need to perform slicing (do not talk to me about Photoshop slicing).
+you need to perform slicing (do not talk to me about my nemesis, Photoshop slicing).
 
-However, I do not want to parse CSS.
+However, I do not want to parse CSS, so I use regular expressions.
 
 Here is the current syntax:
 
@@ -43,6 +43,7 @@ Here is the current syntax:
 		*/
 		background: sprite("progress_view_track.png" repeat-x [12 1]);
 		background: sprite("progress_view_track.png" anchor-right [-8])
+		background: sprite("progress_view_track.png" anchor-right [1 1 5 1]) /* 1,1; size: 5, 1 */
 	}
 
 The build tools would just search for sprite(, and then parse the contents, and replace @view(view-name)
@@ -65,7 +66,7 @@ The syntax is:
 	Partial Rectangle: 	\[ left [width] \]			// left can be positive or negative.
 	Rectangle:		   	\[ left top width height \]
 
-It should be rather trivial to parse, yet also easy to read.
+It is rather trivial to parse, yet also easy to read.
 
 Anchoring
 ---------
