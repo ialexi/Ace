@@ -108,16 +108,36 @@ theme-name is specified as an argument when building.
 
 /* Active */
 .sc-theme .sc-view.sc-checkbox-view.active span.button {
-  background: static_url("images/1.png") -0px -220px no-repeat;
+  background: static_url("images/1.png") -0px -204px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.sel.active span.button {
-  background: static_url("images/1.png") -0px -204px no-repeat;
+  background: static_url("images/1.png") -0px -220px no-repeat;
 }
 
 /* Disabled */
 .sc-theme .sc-view.sc-checkbox-view.disabled {
   opacity: .5;
+}/* Main */
+.disclosure.button {
+  width: 14px;
+  height: 14px;
+}
+
+.disclosure.button.open {
+  background:static_url("images/1.png") -0px -282px no-repeat;
+}
+
+.disclosure.button.open.active {
+  background:static_url("images/1.png") -0px -268px no-repeat;
+}
+
+.disclosure.button.closed {
+  background:static_url("images/1.png") -0px -310px no-repeat;
+}
+
+.disclosure.button.closed.active {
+  background:static_url("images/1.png") -0px -296px no-repeat;
 }.sc-theme .sc-view.sc-button-view {
   background: static_url("images/1.png") -8px -96px no-repeat;
   border: 0px none;
@@ -132,7 +152,7 @@ theme-name is specified as an argument when building.
   left: 8px;
   right: 0px;
   height: 24px;
-  background: static_url("images/1.png") right -72px no-repeat;
+  background: static_url("images/1.png") right -0px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view .sc-button-label {
@@ -146,7 +166,7 @@ theme-name is specified as an argument when building.
 
 /* Selected */
 .sc-theme .sc-view.sc-button-view.sel {
-  background: static_url("images/1.png") -0px -0px no-repeat;
+  background: static_url("images/1.png") -8px -72px no-repeat;
   color: #d5dde9;
   font-weight:200;
   text-shadow: 0px -1px 1px rgba(0,0,0,.7);
@@ -199,6 +219,12 @@ theme-name is specified as an argument when building.
   color: #4a4a4a;
   text-shadow: 0px 1px 1px white;
   font-size:12px;
+}
+
+.sc-theme .sc-view.sc-collection-view.sc-source-list .disclosure {
+  position: absolute;
+  left: -12px;
+  top: 9px;
 }.sc-main {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#bbb));
   height: 100%;
