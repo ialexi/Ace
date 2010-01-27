@@ -5,8 +5,161 @@
   border-bottom: 1px solid #999;
   -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
   z-index: 10;
+}/* */
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-scroll-view {
+  background: rgba(251,251,251,.92);
+  border: 0px none;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item {
+  background: transparent;
+  border: 0px none;
+  -webkit-box-shadow: none;
+  -webkit-border-radius: 0px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item a span.value {
+  margin-left: 10px;
+  line-height: 20px; /* You want it slightly high for characters with descenders */
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-button-view.focus a,
+.sc-menu-item a:hover {
+  color: white;
+  background: static_url("images/2.png") -0px -254px repeat-x;
+  text-shadow: 0px -1px 1px rgba(0, 0, 0, .6);
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-button-view.disabled.focus a,
+.sc-menu-item.disabled a:hover {
+  color: white;
+  background: transparent;
+}
+
+/* Checkboxes */
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item .checkbox {
+  top: 3px;
+  width: 12px; height: 12px;
+  background: static_url("images/1.png") -0px -560px no-repeat;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item.focus .checkbox, 
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item:hover .checkbox {
+  top: 4px; /* NOTE THE SLIGHT DIFFERENCE */
+  background: static_url("images/1.png") -12px -560px no-repeat;
+}
+
+/* Separators */
+.sc-menu-item span.separator {
+  margin-left: 0px;
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 2px;
+  border-top: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+/* Up and Down, like a trampoline */
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-scroller-view {
+  background: transparent;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-scroller-view .arrowUp {
+  position:absolute;
+  left: 50%;
+  top: 4px;
+  margin-left: -7px;
+  height: 14px;
+  width: 14px;
+  background: static_url("images/1.png") -0px -520px no-repeat;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-scroller-view .arrowDown {
+  position:absolute;
+  left: 50%;
+  top: 4px;
+  margin-left: -7px;
+  height: 14px;
+  width: 14px;
+  background: static_url("images/1.png") -0px -496px no-repeat;
+}
+
+/* Corners */
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .top-left-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/1.png") -0px -300px no-repeat;
+  left: -16px;
+  top: -16px;
+  width: 25px;
+  height: 25px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .top-right-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/1.png") -0px -325px no-repeat;
+  right: -16px;
+  top: -16px;
+  width: 25px;
+  height: 25px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .bottom-left-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/1.png") -0px -350px no-repeat;
+  left: -16px;
+  bottom: -16px;
+  width: 25px;
+  height: 25px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .bottom-right-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/1.png") -0px -375px no-repeat;
+  right: -16px;
+  bottom: -16px;
+  width: 25px;
+  height: 25px;
+}
+
+
+/* Edges */
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .bottom-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/2.png") -0px -64px repeat-x;
+  left: 9px;
+  right: 9px;
+  bottom: -16px;
+  height: 25px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .top-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/2.png") -0px -89px repeat-x;
+  left: 9px;
+  right: 9px;
+  top: -16px;
+  height: 25px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .left-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/3.png") -0px -0px repeat-y;
+  top: 9px;
+  bottom: 9px;
+  left: -16px;
+  width: 25px;
+}
+
+.sc-theme .sc-view.sc-panel.sc-picker.sc-menu .right-edge {
+  /* I suppose we'll have to replace these with images... */
+  background: static_url("images/3.png") -25px -0px repeat-y;
+  top: 9px;
+  bottom: 9px;
+  right: -16px;
+  width: 25px;
 }.sc-theme .sc-view.sc-button-view.sc-select-button {
-  background: static_url("images/1.png") -16px -300px no-repeat;
+  background: static_url("images/1.png") -14px -472px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-button .sc-button-inner {
@@ -14,7 +167,7 @@
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-button .sc-button-label {
-  background: static_url("images/2.png") -0px -112px repeat-x;
+  background: static_url("images/2.png") -0px -138px repeat-x;
   text-align: left;
   right: 25px;
   vertical-align:top;
@@ -22,7 +175,7 @@
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-button.active {
-  background: static_url("images/1.png") -14px -372px no-repeat;
+  background: static_url("images/1.png") -16px -400px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-button.active .sc-button-inner {
@@ -30,7 +183,7 @@
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-button.active .sc-button-label {
-  background: static_url("images/2.png") -0px -64px repeat-x;
+  background: static_url("images/2.png") -0px -114px repeat-x;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, .6);
 }
 
@@ -55,7 +208,7 @@
 
 /* Unchecked */
 .sc-theme .sc-view.sc-radio-view span.button {
-  background: static_url("images/1.png") -0px -96px no-repeat;
+  background: static_url("images/1.png") -0px -400px no-repeat;
   width: 16px;
   height:16px;
   vertical-align:middle;
@@ -71,24 +224,24 @@
 
 /* Checked */
 .sc-theme .sc-view.sc-radio-view .sel span.button {
-  background: static_url("images/1.png") -0px -120px no-repeat;
+  background: static_url("images/1.png") -0px -216px no-repeat;
 }
 
 .sc-theme .sc-view.sc-radio-view .mixed span.button {
-  background: static_url("images/1.png") -0px -144px no-repeat;
+  background: static_url("images/1.png") -0px -240px no-repeat;
 }
 
 /* Active */
 .sc-theme .sc-view.sc-radio-view .active span.button {
-  background: static_url("images/1.png") -0px -168px no-repeat;
+  background: static_url("images/1.png") -0px -260px no-repeat;
 }
 
 .sc-theme .sc-view.sc-radio-view .sel.active span.button {
-  background: static_url("images/1.png") -0px -192px no-repeat;
+  background: static_url("images/1.png") -0px -96px no-repeat;
 }
 
 .sc-theme .sc-view.sc-radio-view .mixed.active span.button {
-  background: static_url("images/1.png") -0px -48px no-repeat;
+  background: static_url("images/1.png") -0px -192px no-repeat;
 }
 
 /* Disabled */
@@ -108,7 +261,7 @@ theme-name is specified as an argument when building.
 /* Track */
 .sc-theme .sc-view.sc-progress-view {
   /* anchor right so noise won't show below rounded corners of right piece */
-  background: static_url("images/1.png") -0px -420px no-repeat;
+  background: static_url("images/1.png") -14px -540px no-repeat;
   z-index:0;
   border:0px none;
 }
@@ -118,7 +271,7 @@ theme-name is specified as an argument when building.
   right: 8px;
   position:absolute;
   height:20px;
-  background: static_url("images/2.png") -0px -184px repeat-x;
+  background: static_url("images/2.png") -0px -274px repeat-x;
   z-index:0;
   border:0px none;
 }
@@ -128,7 +281,7 @@ theme-name is specified as an argument when building.
   width: 8px;
   position:absolute;
   height:20px;
-  background: static_url("images/1.png") -0px -440px no-repeat;
+  background: static_url("images/1.png") -0px -572px no-repeat;
   z-index:0;
   border:0px none;
 }
@@ -137,7 +290,7 @@ theme-name is specified as an argument when building.
 
 /* Inner */
 .sc-theme .sc-view.sc-progress-view .sc-inner {
-  background: static_url("images/1.png") -8px -440px no-repeat;
+  background: static_url("images/1.png") -14px -520px no-repeat;
   z-index:1;
   border:0px none;
 }
@@ -147,7 +300,7 @@ theme-name is specified as an argument when building.
   right: 0px;
   position:absolute;
   height:20px;
-  background: static_url("images/1.png") right -280px no-repeat;
+  background: static_url("images/1.png") right -240px no-repeat;
   z-index:1;
   border:0px none;
 }
@@ -157,7 +310,7 @@ theme-name is specified as an argument when building.
   right: 8px;
   position:absolute;
   height:20px;
-  background: static_url("images/2.png") -0px -204px repeat-x;
+  background: static_url("images/2.png") -0px -234px repeat-x;
   z-index:1;
   border:0px none;
 }
@@ -179,7 +332,7 @@ theme-name is specified as an argument when building.
 
 /* Unchecked */
 .sc-theme .sc-view.sc-checkbox-view span.button {
-  background: static_url("images/1.png") -0px -280px no-repeat;
+  background: static_url("images/1.png") -0px -120px no-repeat;
   width: 16px;
   height:16px;
   position:absolute;
@@ -193,24 +346,24 @@ theme-name is specified as an argument when building.
 
 /* Checked */
 .sc-theme .sc-view.sc-checkbox-view.sel span.button {
-  background: static_url("images/1.png") -0px -72px no-repeat;
+  background: static_url("images/1.png") -0px -168px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.mixed span.button {
-  background: static_url("images/1.png") -0px -216px no-repeat;
+  background: static_url("images/1.png") -0px -72px no-repeat;
 }
 
 /* Active */
 .sc-theme .sc-view.sc-checkbox-view.active span.button {
-  background: static_url("images/1.png") -0px -300px no-repeat;
+  background: static_url("images/1.png") -0px -48px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.sel.active span.button {
-  background: static_url("images/1.png") -0px -260px no-repeat;
+  background: static_url("images/1.png") -0px -144px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.mixed.active span.button {
-  background: static_url("images/1.png") -0px -240px no-repeat;
+  background: static_url("images/1.png") -0px -280px no-repeat;
 }
 
 /* Disabled */
@@ -223,21 +376,21 @@ theme-name is specified as an argument when building.
 }
 
 .disclosure.button.open {
-  background:static_url("images/1.png") -0px -324px no-repeat;
+  background:static_url("images/1.png") -0px -424px no-repeat;
 }
 
 .disclosure.button.open.active {
-  background:static_url("images/1.png") -0px -348px no-repeat;
+  background:static_url("images/1.png") -0px -448px no-repeat;
 }
 
 .disclosure.button.closed {
-  background:static_url("images/1.png") -0px -396px no-repeat;
+  background:static_url("images/1.png") -0px -472px no-repeat;
 }
 
 .disclosure.button.closed.active {
-  background:static_url("images/1.png") -0px -372px no-repeat;
+  background:static_url("images/1.png") -0px -540px no-repeat;
 }.sc-theme .sc-view.sc-button-view {
-  background: static_url("images/1.png") -14px -396px no-repeat;
+  background: static_url("images/1.png") -14px -496px no-repeat;
   border: 0px none;
   color: #555;
   text-shadow: 0px 1px 1px white;
@@ -250,7 +403,7 @@ theme-name is specified as an argument when building.
   left: 8px;
   right: 0px;
   height: 24px;
-  background: static_url("images/1.png") right -192px no-repeat;
+  background: static_url("images/1.png") right -120px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view .sc-button-label {
@@ -259,23 +412,23 @@ theme-name is specified as an argument when building.
   right: 8px;
   height: 24px;
   padding-top:1px;
-  background: static_url("images/2.png") -0px -160px repeat-x;
+  background: static_url("images/2.png") -0px -210px repeat-x;
 }
 
 /* Selected */
 .sc-theme .sc-view.sc-button-view.sel {
-  background: static_url("images/1.png") -14px -348px no-repeat;
+  background: static_url("images/1.png") -14px -448px no-repeat;
   color: #d5dde9;
   font-weight:200;
   text-shadow: 0px -1px 1px rgba(0,0,0,.7);
 }
 
 .sc-theme .sc-view.sc-button-view.sel .sc-button-inner {
-  background: static_url("images/1.png") right -120px no-repeat;
+  background: static_url("images/1.png") right -168px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view.sel .sc-button-label {
-  background: static_url("images/2.png") -0px -136px repeat-x;
+  background: static_url("images/2.png") -0px -186px repeat-x;
 }
 
 /* Disabled */
@@ -285,17 +438,17 @@ theme-name is specified as an argument when building.
 
 /* Active */
 .sc-theme .sc-view.sc-button-view.active {
-  background: static_url("images/1.png") -14px -324px no-repeat;
+  background: static_url("images/1.png") -14px -424px no-repeat;
   color: #333;
   text-shadow: 0px 1px 1px white;
 }
 
 .sc-theme .sc-view.sc-button-view.active .sc-button-inner {
-  background: static_url("images/1.png") right -72px no-repeat;
+  background: static_url("images/1.png") right -216px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view.active .sc-button-label {
-  background: static_url("images/2.png") -0px -88px repeat-x;
+  background: static_url("images/2.png") -0px -162px repeat-x;
 }.sc-theme .sc-view.sc-split-divider-view {
   background: #555;
   border: 0px none;
