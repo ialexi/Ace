@@ -1,6 +1,6 @@
 /* */
 @view(sc-panel.sc-picker.sc-menu) .sc-menu-scroll-view {
-  background: rgba(251,251,251,.92);
+  background:  rgba(251,251,251,.92);
   border: 0px none;
 }
 
@@ -61,7 +61,7 @@
 @view(sc-panel.sc-picker.sc-menu) .sc-menu-scroller-view .arrowUp {
   position:absolute;
   left: 50%;
-  top: 4px;
+  top: -3px;
   margin-left: -7px;
   height: 14px;
   width: 14px;
@@ -71,7 +71,7 @@
 @view(sc-panel.sc-picker.sc-menu) .sc-menu-scroller-view .arrowDown {
   position:absolute;
   left: 50%;
-  top: 4px;
+  bottom: -3px;
   margin-left: -7px;
   height: 14px;
   width: 14px;
@@ -83,7 +83,7 @@
   /* I suppose we'll have to replace these with images... */
   background: sprite("menu.png" [0 0 25 25]);
   left: -16px;
-  top: -16px;
+  top: -25px;
   width: 25px;
   height: 25px;
 }
@@ -92,7 +92,7 @@
   /* I suppose we'll have to replace these with images... */
   background: sprite("menu.png" [-25 0 25 25]);
   right: -16px;
-  top: -16px;
+  top: -25px;
   width: 25px;
   height: 25px;
 }
@@ -101,7 +101,7 @@
   /* I suppose we'll have to replace these with images... */
   background: sprite("menu.png" [0 -25 25 25]);
   left: -16px;
-  bottom: -16px;
+  bottom: -25px;
   width: 25px;
   height: 25px;
 }
@@ -110,7 +110,7 @@
   /* I suppose we'll have to replace these with images... */
   background: sprite("menu.png" [-25 -25 25 25]);
   right: -16px;
-  bottom: -16px;
+  bottom: -25px;
   width: 25px;
   height: 25px;
 }
@@ -122,7 +122,7 @@
   background: sprite("menu.png" repeat-x [25 -25 1 25]);
   left: 9px;
   right: 9px;
-  bottom: -16px;
+  bottom: -25px;
   height: 25px;
 }
 
@@ -131,24 +131,24 @@
   background: sprite("menu.png" repeat-x [25 0 1 25]);
   left: 9px;
   right: 9px;
-  top: -16px;
+  top: -25px;
   height: 25px;
 }
 
 @view(sc-panel.sc-picker.sc-menu) .left-edge {
   /* I suppose we'll have to replace these with images... */
-  background: sprite("menu.png" repeat-y [0 25 25 1]);
-  top: 9px;
-  bottom: 9px;
+  background: sprite("menu.png" repeat-y [0 25 16 1]);
+  top: 0px;
+  bottom: 0px;
   left: -16px;
-  width: 25px;
+  width: 16px;
 }
 
 @view(sc-panel.sc-picker.sc-menu) .right-edge {
   /* I suppose we'll have to replace these with images... */
-  background: sprite("menu.png" repeat-y [-25 25 25 1]);
-  top: 9px;
-  bottom: 9px;
+  background: sprite("menu.png" repeat-y [-16 25 16 1]);
+  top: 0px;
+  bottom: 0px;
   right: -16px;
-  width: 25px;
+  width: 16px;
 }
