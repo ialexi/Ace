@@ -158,15 +158,15 @@
   bottom: 0px;
   right: -16px;
   width: 16px;
-}.sc-theme .sc-view.sc-button-view.sc-select-button {
+}.sc-theme .sc-view.sc-button-view.sc-select-view {
   background: static_url("images/1.png") -14px -472px no-repeat;
 }
 
-.sc-theme .sc-view.sc-button-view.sc-select-button .sc-button-inner {
+.sc-theme .sc-view.sc-button-view.sc-select-view .sc-button-inner {
   background: static_url("images/1.png") right -0px no-repeat;
 }
 
-.sc-theme .sc-view.sc-button-view.sc-select-button .sc-button-label {
+.sc-theme .sc-view.sc-button-view.sc-select-view .sc-button-label {
   background: static_url("images/2.png") -0px -138px repeat-x;
   text-align: left;
   right: 25px;
@@ -174,21 +174,21 @@
   color: #333;
 }
 
-.sc-theme .sc-view.sc-button-view.sc-select-button.active {
+.sc-theme .sc-view.sc-button-view.sc-select-view.active {
   background: static_url("images/1.png") -16px -400px no-repeat;
 }
 
-.sc-theme .sc-view.sc-button-view.sc-select-button.active .sc-button-inner {
+.sc-theme .sc-view.sc-button-view.sc-select-view.active .sc-button-inner {
   background: static_url("images/1.png") right -24px no-repeat;
 }
 
-.sc-theme .sc-view.sc-button-view.sc-select-button.active .sc-button-label {
+.sc-theme .sc-view.sc-button-view.sc-select-view.active .sc-button-label {
   background: static_url("images/2.png") -0px -114px repeat-x;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, .6);
 }
 
 
-.sc-select-button .sc-menu-item span.value { margin-left: 10px; }.sc-theme .sc-view.sc-radio-view {
+.sc-select-view .sc-menu-item span.value { margin-left: 10px; }.sc-theme .sc-view.sc-radio-view {
   line-height: 18px;
   vertical-align: middle;
 }

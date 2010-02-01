@@ -1,12 +1,12 @@
-@view(sc-button-view.sc-select-button) {
+@view(sc-button-view.sc-select-view) {
   background: sprite("normal_select.png" clear [0 8]);
 }
 
-@view(sc-button-view.sc-select-button) .sc-button-inner {
+@view(sc-button-view.sc-select-view) .sc-button-inner {
   background: sprite("normal_select.png" anchor-right [-25]);
 }
 
-@view(sc-button-view.sc-select-button) .sc-button-label {
+@view(sc-button-view.sc-select-view) .sc-button-label {
   background: sprite("normal_select.png" repeat-x [8 1]);
   text-align: left;
   right: 25px;
@@ -14,18 +14,18 @@
   color: #333;
 }
 
-@view(sc-button-view.sc-select-button).active {
+@view(sc-button-view.sc-select-view).active {
   background: sprite("active_select.png" clear [0 8]);
 }
 
-@view(sc-button-view.sc-select-button).active .sc-button-inner {
+@view(sc-button-view.sc-select-view).active .sc-button-inner {
   background: sprite("active_select.png" anchor-right [-25]);
 }
 
-@view(sc-button-view.sc-select-button).active .sc-button-label {
+@view(sc-button-view.sc-select-view).active .sc-button-label {
   background: sprite("active_select.png" repeat-x [8 1]);
   text-shadow: 0px 1px 1px rgba(255, 255, 255, .6);
 }
 
 
-.sc-select-button .sc-menu-item span.value { margin-left: 10px; }
+.sc-select-view .sc-menu-item span.value { margin-left: 10px; }
