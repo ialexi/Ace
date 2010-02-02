@@ -1,17 +1,44 @@
-There are two PSDs: Light and Dark.
+There are two concept PSDs: Light and Dark. Dark doesn't receive as much attention, and it shows.
 
-Dark doesn't receive as much attention, and it shows.
+Ace Theme
+=========
+(from themes/ace/README.md)
+
+The theme should already be generated. To actually regenerate the theme
+(which you have to do if you are adjusting it), you need rmagick. To install 
+rmagick, first install imagemagick (easiest way I know of is through MacPorts),
+and then install the rmagick gem.
+
+To generate the theme, you run the following from the theme folder:
+
+	ruby generate_theme.rb ace.light
+
+Right now, the ace.light argument is not used, but it is still a required argument.
+Silly, I know, but supposedly we'll have differently-named themes at some point, so...
+
+Sample Controls
+===============
+I have been rewriting the sample controls app. You can see a somewhat recent version here:
+
+http://create.tpsitulsa.com/static/sample_controls/
+
+Known issues/partially implemented controls:
+
+- FormView has a bug that causes RadioViews to disappear if you visit, leave, and come back to them.
+- No indeterminate progress bar design.
+- No capsule buttons.
+- No alternate control sizes.
+- Some corners/edges appear weird (possible the path edges are not pixel-aligned)
+
+
+There are many more completely unimplemented controls, but those are easier to notice than partially-implemented ones.
+
+
 
 Build Tools
 ===========
 I think if it were easier to really modify Ace and create all the sprites and such,
 it would be improved more often. (Perhaps it is easily updated and I am missing how?)
-
-I have created a little build tool which you can run with:
-
-	ruby generate_theme.rb ace.light
-
-The tool requires RMagick, which, unfortunately, is a bit of a pain to install.
 
 The operation works inside the theme folder, and generates the "resources" folder used
 by SproutCore. There are various options that can be seen by calling with the --help argument.
@@ -48,6 +75,7 @@ Here is the current syntax:
 
 The build tools would just search for sprite(, and then parse the contents, and replace @view(view-name)
 with .sc-view.view-name.theme.name (where theme.name is specified via an argument to the build tool).
+Note: right now, it does not do anything with the theme name; this may change in future.
 
 The syntax is:
 
