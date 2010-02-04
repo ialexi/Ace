@@ -26,6 +26,11 @@ config = {}
 argparser = OptionParser.new {|opts|
   opts.banner = "Usage: ruby generate_theme.rb [options] theme.name"
   
+  config[:input] = "./"
+  opts.on('-i', '--input [directory]', "Input directory (default: ./)") {|input|
+    config[:input] = input
+  }
+  
   config[:output] = "resources/"
   opts.on('-o', '--output', 'Set output path (default: resources/)') {|out|
     out += "." if out.length == 0
@@ -34,8 +39,8 @@ argparser = OptionParser.new {|opts|
   }
   
   config[:url_template] = "static_url(\"%s\")"
-  opts.on('-u', '--url', 'The URL template (default: static_url(\"%s\") )') {|out|
-    config[:output] = out
+  opts.on('-u', '--url [PATTERN]', 'The URL template (default: static_url(\"%s\") )') {|template|
+    config[:url_template] = template
   }
 }
 
@@ -51,7 +56,7 @@ end
 require 'find'
 images = {}
 parsers = []
-Find.find('./') do |f|
+Find.find(config[:input]) do |f|
   if f =~ /^\.\/(resources)|\/\./
     Find.prune
   end
