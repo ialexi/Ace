@@ -26,6 +26,25 @@ config = {}
 argparser = OptionParser.new {|opts|
   opts.banner = "Usage: ruby generate_theme.rb [options] theme.name"
   
+  config[:optimization_limit] = 50000
+  opts.on(
+    '-l', 
+    '--optimization-limit [limit]', Integer,
+    "Optimization limit; if reducing latency by eliminating a file causes more " +
+    "than [limit] wasted pixels, it won't be done."
+  ) {|limit|
+    config[:optimization_limit] = limit
+  }
+  
+  opts.on('--prefer-fewer-files', "Prefer fewer files by setting the optimization limit to 2 million pixels.") {
+    config[:optimization_limit] = 2000000
+  }
+  
+  opts.on('--prefer-smaller-download', "Prefer smaller download by setting the optimization limit to 0 pixels.") {
+    config[:optimization_limit] = 0
+  }
+  
+  
   config[:input] = "./"
   opts.on('-i', '--input [directory]', "Input directory (default: ./)") {|input|
     config[:input] = input

@@ -10,6 +10,7 @@ class Slicer
   
   def initialize(config)
     @output_dir = config[:output]
+    @optimization_limit = config[:optimization_limit]
   end
   
   # slice performs the slicing operations, putting the images in the output directory
@@ -104,6 +105,9 @@ class Slicer
       total_wasted_b = 0
       a.each {|e| total_wasted_a += e[:wasted] }
       b.each {|e| total_wasted_b += e[:wasted] }
+      
+      total_wasted_a -= @optimization_limit if a.length < 3
+      total_wasted_b -= @optimization_limit if b.length < 3
       total_wasted_a <=> total_wasted_b
     }
     
