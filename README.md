@@ -22,24 +22,45 @@ I have been rewriting the sample controls app. You can see a somewhat recent ver
 
 http://create.tpsitulsa.com/static/sample_controls/
 
-Known issues/partially implemented controls:
 
-- FormView has a bug that causes RadioViews to disappear if you visit, leave, and come back to them.
-- No indeterminate progress bar design.
-- No capsule buttons.
-- No alternate control sizes.
-- Some corners/edges appear weird (possible the path edges are not pixel-aligned)
+Growing Todo List:
 
+- SliderView
+- List Views
+	- bg color for selected items—currently is gray, should probably be blue
+	- Anything special needed to make icons, checkboxes, unread count or whatever indicator show up properly?
+- Grid View? (doesn't appear to have much of a style at the moment—should that be changed?)
+- Disclosure Buttons
+- Capsule buttons
+- Indeterminate progress bar
+	- May be impossible to do with rounded corners unless pattern fades at edges
+- SegmentedView
+	- Start with PSDs for Button; they should use very similar (if not the same) styles.
+- WellView
+- PickerPane, especially PickerPane.pointer
+- AlertPane
+	- Set up icons (redesign some for new Ace?)
+- Alternate control sizes? (I'm not sure what the alternate sizes are supposed to be at the moment)
+- Checkbox corners look rough; can this be fixed?
+- Progress bar tracks are too dark
+- Selected style for menu items (for instance, in SelectView)
+- Testing of buttons, radio buttons, and checkboxes with icons
 
-There are many more completely unimplemented controls, but those are easier to notice than partially-implemented ones.
+Optional goodies:
 
+- Revise ButtonView so it will have the option of creating true three-part buttons
+  where the PIECES DON'T OVERLAP!!! This would allow semitransparent borders, which
+  would help buttons work on a variety of backgrounds.
+- Make things use semitransparent borders (see above); test on many backgrounds.
 
+Needing Discussion:
+
+- Icons. Keep same? Make sedate? Some of each?
+
+There may be other things too...
 
 Build Tools
 ===========
-I think if it were easier to really modify Ace and create all the sprites and such,
-it would be improved more often. (Perhaps it is easily updated and I am missing how?)
-
 The operation works inside the theme folder, and generates the "resources" folder used
 by SproutCore. There are various options that can be seen by calling with the --help argument.
 
