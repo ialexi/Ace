@@ -40,7 +40,7 @@
 .sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item .checkbox {
   top: 3px;
   width: 12px; height: 12px;
-  background: static_url("images/1.png") -32px -526px no-repeat;
+  background: static_url("images/1.png") -28px -666px no-repeat;
 }
 
 .sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-item.focus .checkbox, 
@@ -72,7 +72,7 @@
   margin-left: -7px;
   height: 14px;
   width: 14px;
-  background: static_url("images/1.png") -28px -740px no-repeat;
+  background: static_url("images/1.png") -28px -642px no-repeat;
 }
 
 .sc-theme .sc-view.sc-panel.sc-picker.sc-menu .sc-menu-scroller-view .arrowDown {
@@ -82,7 +82,7 @@
   margin-left: -7px;
   height: 14px;
   width: 14px;
-  background: static_url("images/1.png") -28px -720px no-repeat;
+  background: static_url("images/1.png") -28px -628px no-repeat;
 }
 
 /* Corners */
@@ -229,7 +229,7 @@
   background: static_url("images/2.png") -48px -0px repeat-y;
 }
 .sc-theme .sc-view.sc-button-view.sc-select-view {
-  background: static_url("images/1.png") -42px -696px no-repeat;
+  background: static_url("images/1.png") -32px -690px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-view .sc-button-inner {
@@ -245,7 +245,7 @@
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-view.active {
-  background: static_url("images/1.png") -32px -622px no-repeat;
+  background: static_url("images/1.png") -40px -666px no-repeat;
 }
 
 .sc-theme .sc-view.sc-button-view.sc-select-view.active .sc-button-inner {
@@ -275,13 +275,13 @@
 	width: 14px;
 	height: 16px;
 	top: 0px;
-	background: static_url("images/1.png") -0px -696px no-repeat;
+	background: static_url("images/1.png") -0px -612px no-repeat;
 }
 
 /* Buttons */
 .sc-theme .sc-view.sc-scroller-view.vertical .button-top {
 	position:absolute;
-	background: static_url("images/1.png") -15px -670px no-repeat;
+	background: static_url("images/1.png") -15px -586px no-repeat;
 	height: 26px;
     width: 14px;
     bottom: 14px;
@@ -289,7 +289,7 @@
 
 .sc-theme .sc-view.sc-scroller-view.vertical .button-bottom {
 	position:absolute;
-	background: static_url("images/1.png") -28px -696px no-repeat;
+	background: static_url("images/1.png") -28px -612px no-repeat;
 	height: 15px;
     width: 14px;
     bottom: 0px;
@@ -297,11 +297,11 @@
 
 /* Active */
 .sc-theme .sc-view.sc-scroller-view.vertical .button-top:active {
-	background: static_url("images/1.png") -29px -670px no-repeat;
+	background: static_url("images/1.png") -29px -586px no-repeat;
 }
 
 .sc-theme .sc-view.sc-scroller-view.vertical .button-bottom:active {
-	background: static_url("images/1.png") -14px -696px no-repeat;
+	background: static_url("images/1.png") -14px -612px no-repeat;
 }
 
 /* Thumb */
@@ -322,7 +322,7 @@
 	width: 14px;
 	top: 0px;
 	height: 10px;
-	background: static_url("images/1.png") -14px -760px no-repeat;
+	background: static_url("images/1.png") -14px -666px no-repeat;
 }
 
 .sc-theme .sc-view.sc-scroller-view.vertical .thumb-bottom {
@@ -330,7 +330,7 @@
 	width: 14px;
 	bottom: 0px;
 	height: 10px;
-	background: static_url("images/1.png") -0px -760px no-repeat;
+	background: static_url("images/1.png") -0px -666px no-repeat;
 }/* Track */
 .sc-theme .sc-view.sc-scroller-view.horizontal .track {
 	position: absolute;
@@ -348,7 +348,7 @@
 	height: 14px;
 	width: 16px;
 	left: 0px;
-	background: static_url("images/1.png") -0px -646px no-repeat;
+	background: static_url("images/1.png") -16px -570px no-repeat;
 }
 
 /* Buttons */
@@ -362,7 +362,7 @@
 
 .sc-theme .sc-view.sc-scroller-view.horizontal .button-right {
 	position:absolute;
-	background: static_url("images/1.png") -16px -646px no-repeat;
+	background: static_url("images/1.png") -32px -570px no-repeat;
 	width: 15px;
     height: 14px;
     right: 0px;
@@ -374,7 +374,7 @@
 }
 
 .sc-theme .sc-view.sc-scroller-view.horizontal .button-right:active {
-	background: static_url("images/1.png") -0px -670px no-repeat;
+	background: static_url("images/1.png") -0px -586px no-repeat;
 }
 
 /* Thumb */
@@ -395,7 +395,7 @@
 	height: 14px;
 	left: 0px;
 	width: 10px;
-	background: static_url("images/1.png") -32px -574px no-repeat;
+	background: static_url("images/1.png") -42px -628px no-repeat;
 }
 
 .sc-theme .sc-view.sc-scroller-view.horizontal .thumb-right {
@@ -403,7 +403,7 @@
 	height: 14px;
 	right: 0px;
 	width: 10px;
-	background: static_url("images/1.png") -32px -550px no-repeat;
+	background: static_url("images/1.png") -42px -612px no-repeat;
 }.sc-theme .sc-view.sc-radio-view {
   line-height: 18px;
   vertical-align: middle;
@@ -424,7 +424,7 @@
 
 /* Unchecked */
 .sc-theme .sc-view.sc-radio-view span.button {
-  background: static_url("images/1.png") -0px -574px no-repeat;
+  background: static_url("images/1.png") -16px -538px no-repeat;
   width: 16px;
   height:16px;
   vertical-align:middle;
@@ -440,16 +440,16 @@
 
 /* Checked */
 .sc-theme .sc-view.sc-radio-view .sel span.button {
-  background: static_url("images/1.png") -16px -550px no-repeat;
+  background: static_url("images/1.png") -0px -538px no-repeat;
 }
 
 .sc-theme .sc-view.sc-radio-view .mixed span.button {
-  background: static_url("images/1.png") -0px -550px no-repeat;
+  background: static_url("images/1.png") -32px -522px no-repeat;
 }
 
 /* Active */
 .sc-theme .sc-view.sc-radio-view .active span.button {
-  background: static_url("images/1.png") -0px -526px no-repeat;
+  background: static_url("images/1.png") -0px -522px no-repeat;
 }
 
 .sc-theme .sc-view.sc-radio-view .sel.active span.button {
@@ -477,7 +477,7 @@ theme-name is specified as an argument when building.
 /* Track */
 .sc-theme .sc-view.sc-progress-view {
   /* anchor right so noise won't show below rounded corners of right piece */
-  background: static_url("images/1.png") -42px -720px no-repeat;
+  background: static_url("images/1.png") -0px -714px no-repeat;
   z-index:0;
   border:0px none;
 }
@@ -497,7 +497,7 @@ theme-name is specified as an argument when building.
   width: 8px;
   position:absolute;
   height:20px;
-  background: static_url("images/1.png") -42px -740px no-repeat;
+  background: static_url("images/1.png") -0px -734px no-repeat;
   z-index:0;
   border:0px none;
 }
@@ -506,7 +506,7 @@ theme-name is specified as an argument when building.
 
 /* Inner */
 .sc-theme .sc-view.sc-progress-view .sc-inner {
-  background: static_url("images/1.png") -28px -760px no-repeat;
+  background: static_url("images/1.png") -8px -734px no-repeat;
   z-index:1;
   border:0px none;
 }
@@ -516,7 +516,7 @@ theme-name is specified as an argument when building.
   right: 0px;
   position:absolute;
   height:20px;
-  background: static_url("images/1.png") right -622px no-repeat;
+  background: static_url("images/1.png") right -477px no-repeat;
   z-index:1;
   border:0px none;
 }
@@ -548,7 +548,7 @@ theme-name is specified as an argument when building.
 
 /* Unchecked */
 .sc-theme .sc-view.sc-checkbox-view span.button {
-  background: static_url("images/1.png") -16px -526px no-repeat;
+  background: static_url("images/1.png") -16px -522px no-repeat;
   width: 16px;
   height:16px;
   position:absolute;
@@ -562,24 +562,24 @@ theme-name is specified as an argument when building.
 
 /* Checked */
 .sc-theme .sc-view.sc-checkbox-view.sel span.button {
-  background: static_url("images/1.png") -16px -622px no-repeat;
+  background: static_url("images/1.png") -0px -570px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.mixed span.button {
-  background: static_url("images/1.png") -16px -574px no-repeat;
+  background: static_url("images/1.png") -32px -538px no-repeat;
 }
 
 /* Active */
 .sc-theme .sc-view.sc-checkbox-view.active span.button {
-  background: static_url("images/1.png") -0px -598px no-repeat;
+  background: static_url("images/1.png") -0px -554px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.sel.active span.button {
-  background: static_url("images/1.png") -0px -622px no-repeat;
+  background: static_url("images/1.png") -32px -554px no-repeat;
 }
 
 .sc-theme .sc-view.sc-checkbox-view.mixed.active span.button {
-  background: static_url("images/1.png") -16px -598px no-repeat;
+  background: static_url("images/1.png") -16px -554px no-repeat;
 }
 
 /* Disabled */
@@ -592,58 +592,73 @@ theme-name is specified as an argument when building.
 }
 
 .disclosure.button.open {
-  background:static_url("images/1.png") -14px -720px no-repeat;
+  background:static_url("images/1.png") -14px -628px no-repeat;
 }
 
 .disclosure.button.open.active {
-  background:static_url("images/1.png") -0px -740px no-repeat;
+  background:static_url("images/1.png") -0px -642px no-repeat;
 }
 
 .disclosure.button.closed {
-  background:static_url("images/1.png") -14px -740px no-repeat;
+  background:static_url("images/1.png") -14px -642px no-repeat;
 }
 
 .disclosure.button.closed.active {
-  background:static_url("images/1.png") -0px -720px no-repeat;
+  background:static_url("images/1.png") -0px -628px no-repeat;
 }.sc-theme .sc-view.sc-button-view {
-  background: static_url("images/1.png") -43px -670px no-repeat;
   border: 0px none;
   color: #555;
   text-shadow: 0px 1px 1px white;
-  -webkit-box-shadow: 0px 1px 1px rgba(255, 255, 255, .6);
-  -webkit-border-radius:5px;
 }
 
-.sc-theme .sc-view.sc-button-view .sc-button-inner {
-  position:absolute;
-  left: 8px;
-  right: 0px;
+.sc-theme .sc-view.sc-button-view .button-left {
+  position: absolute;
+  left: 0px;
+  width: 8px;
   height: 24px;
-  background: static_url("images/1.png") right -477px no-repeat;
+  background: static_url("images/1.png") -24px -690px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view .button-right {
+  position:absolute;
+  right: 0px;
+  width: 8px;
+  height: 24px;
+  background: static_url("images/1.png") -0px -690px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view .button-middle {
+  position: absolute;
+  left: 8px; right: 8px;
+  height: 24px;
+  background: static_url("images/1.png") -0px -210px repeat-x;
+  
 }
 
 .sc-theme .sc-view.sc-button-view .sc-button-label {
   position:absolute;
-  left: 0px;
+  left: 8px;
   right: 8px;
   height: 24px;
   padding-top:1px;
-  background: static_url("images/1.png") -0px -210px repeat-x;
 }
 
 /* Selected */
 .sc-theme .sc-view.sc-button-view.sel {
-  background: static_url("images/1.png") -32px -598px no-repeat;
   color: #d5dde9;
   font-weight:200;
   text-shadow: 0px -1px 1px rgba(0,0,0,.7);
 }
 
-.sc-theme .sc-view.sc-button-view.sel .sc-button-inner {
-  background: static_url("images/1.png") right -502px no-repeat;
+.sc-theme .sc-view.sc-button-view.sel .button-left {
+  background: static_url("images/1.png") -42px -642px no-repeat;
 }
 
-.sc-theme .sc-view.sc-button-view.sel .sc-button-label {
+.sc-theme .sc-view.sc-button-view.sel .button-right {
+  background: static_url("images/1.png") -8px -690px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view.sel .button-middle {
   background: static_url("images/1.png") -0px -138px repeat-x;
 }
 
@@ -654,16 +669,19 @@ theme-name is specified as an argument when building.
 
 /* Active */
 .sc-theme .sc-view.sc-button-view.active {
-  background: static_url("images/1.png") -31px -646px no-repeat;
   color: #333;
   text-shadow: 0px 1px 1px white;
 }
 
-.sc-theme .sc-view.sc-button-view.active .sc-button-inner {
-  background: static_url("images/1.png") right -402px no-repeat;
+.sc-theme .sc-view.sc-button-view.active .button-left {
+  background: static_url("images/1.png") -16px -690px no-repeat;
 }
 
-.sc-theme .sc-view.sc-button-view.active .sc-button-label {
+.sc-theme .sc-view.sc-button-view.active .button-right {
+  background: static_url("images/1.png") -43px -586px no-repeat;
+}
+
+.sc-theme .sc-view.sc-button-view.active .button-middle {
   background: static_url("images/1.png") -0px -114px repeat-x;
 }.sc-theme .sc-view.sc-split-divider-view {
   background: #555;
