@@ -2,8 +2,6 @@ There are two concept PSDs: Light and Dark. Dark doesn't receive as much attenti
 
 Ace Theme
 =========
-(from themes/ace/README.md)
-
 The theme should already be generated. To actually regenerate the theme
 (which you have to do if you are adjusting it), you need rmagick. To install 
 rmagick, first install imagemagick (easiest way I know of is through MacPorts),
@@ -11,7 +9,7 @@ and then install the rmagick gem.
 
 To generate the theme, you run the following from the theme folder:
 
-	ruby chance/generate_theme.rb ace.light
+    chance/chance.rb ace.light
 
 Right now, the ace.light argument is not used, but it is still a required argument.
 Silly, I know, but supposedly we'll have differently-named themes at some point, so...
