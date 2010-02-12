@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # A CSSParser object is created for every file processed. It opens the file,
 # reads its contents, and can perform two actions on it: parsing and generating.
 #
@@ -15,7 +17,7 @@
 # I often do, but I usually follow that with a rewrite).
 # But still, it generally works, and works with acceptable speed.
 
-
+$: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
 require 'css'
 require 'slicedice'
@@ -45,7 +47,7 @@ argparser = OptionParser.new {|opts|
   }
   
   
-  config[:input] = "./"
+  config[:input] = "./src/"
   opts.on('-i', '--input [directory]', "Input directory (default: ./)") {|input|
     config[:input] = input
   }

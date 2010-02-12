@@ -283,7 +283,7 @@ class Slicer
         img[:y] = y
         plan << img
         
-        wasted_pixels += total_width - normal_width
+        wasted_pixels += (total_width - normal_width) * (img[:height])
         row_space = 0
         row_height = img[:height]
       end

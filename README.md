@@ -11,10 +11,12 @@ and then install the rmagick gem.
 
 To generate the theme, you run the following from the theme folder:
 
-	ruby generate_theme.rb ace.light
+	ruby chance/generate_theme.rb ace.light
 
 Right now, the ace.light argument is not used, but it is still a required argument.
 Silly, I know, but supposedly we'll have differently-named themes at some point, so...
+
+"Chance" is named after the gardener from Being There.
 
 Sample Controls
 ===============

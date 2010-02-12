@@ -2,13 +2,14 @@
   border: 0px none;
   color: #555;
   text-shadow: 0px 1px 1px white;
+  overflow: visible;
 }
 
 @view(sc-button-view) .button-left {
   position: absolute;
   left: 0px;
   width: 8px;
-  height: 24px;
+  height: 25px;
   background: sprite("normal_button.png" [0 8]);
 }
 
@@ -16,14 +17,14 @@
   position:absolute;
   right: 0px;
   width: 8px;
-  height: 24px;
+  height: 25px;
   background: sprite("normal_button.png" [-8]);
 }
 
 @view(sc-button-view) .button-middle {
   position: absolute;
   left: 8px; right: 8px;
-  height: 24px;
+  height: 25px;
   background: sprite("normal_button.png" repeat-x [8, 1]);
   
 }
