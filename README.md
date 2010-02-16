@@ -1,11 +1,24 @@
 There are two concept PSDs: Light and Dark. Dark doesn't receive as much attention, and it shows.
 
+Prerequisites
+=============
+To use the theme, you'll need a custom version & branch of SproutCore that has an updated rendering infrastructure
+from here:
+
+    http://github.com/ialexi/sproutcore/tree/renderers
+    
+    Or, to clone:
+    
+    git://github.com/ialexi/sproutcore.git renderers
+    
+To generate new versions of the theme, you need RMagick.
+
+To install rmagick, first install imagemagick (easiest way I know of is through MacPorts),
+and then install the rmagick gem.
+
 Ace Theme
 =========
-The theme should already be generated. To actually regenerate the theme
-(which you have to do if you are adjusting it), you need rmagick. To install 
-rmagick, first install imagemagick (easiest way I know of is through MacPorts),
-and then install the rmagick gem.
+The theme should already be generated.
 
 To generate the theme, you run the following from the theme folder:
 
@@ -16,48 +29,57 @@ Silly, I know, but supposedly we'll have differently-named themes at some point,
 
 "Chance" is named after the gardener from Being There.
 
-Sample Controls
-===============
-I have been rewriting the sample controls app. You can see a somewhat recent version here:
-
-http://create.tpsitulsa.com/static/sample_controls/
-
+TODO LIST
+=========
+Please feel free to tackle some of these.
 
 Growing Todo List:
 
+- SegmentedView
+	- Start with PSDs for Button; they should use very similar (if not the same) styles.
+- TabView
+  - Should mostly be handled by SegmentedView, but will likely need stuff for the tab container.
 - SliderView
-- List Views
+- List & Collection Views
 	- bg color for selected items—currently is gray, should probably be blue
-	- Anything special needed to make icons, checkboxes, unread count or whatever indicator show up properly?
+	- ListItemView checkboxes
+	- ListItemView icons
+	- ListItemView unread or whatever indicators
+	- ... any other ListItemView things.
 - Grid View? (doesn't appear to have much of a style at the moment—should that be changed?)
 - Disclosure Buttons
 - Capsule buttons
 - Indeterminate progress bar
 	- May be impossible to do with rounded corners unless pattern fades at edges
-- SegmentedView
-	- Start with PSDs for Button; they should use very similar (if not the same) styles.
 - WellView
 - PickerPane, especially PickerPane.pointer
 - AlertPane
 	- Set up icons (redesign some for new Ace?)
 - Alternate control sizes? (I'm not sure what the alternate sizes are supposed to be at the moment)
-- Checkbox corners look rough; can this be fixed?
-- Progress bar tracks are too dark
 - Selected style for menu items (for instance, in SelectView)
+  - Top border not dark enough at the moment?
 - Testing of buttons, radio buttons, and checkboxes with icons
 
-Optional goodies:
-
-- Revise ButtonView so it will have the option of creating true three-part buttons
-  where the PIECES DON'T OVERLAP!!! This would allow semitransparent borders, which
-  would help buttons work on a variety of backgrounds.
-- Make things use semitransparent borders (see above); test on many backgrounds.
+Optional goodies: ???
 
 Needing Discussion:
 
 - Icons. Keep same? Make sedate? Some of each?
 
 There may be other things too...
+
+
+Completed tasks:
+
+- Checkbox corners look rough; can this be fixed?
+- Progress bar tracks are too dark
+- Revise ButtonView so it will have the option of creating true three-part buttons
+  where the PIECES DON'T OVERLAP!!! This would allow semitransparent borders, which
+  would help buttons work on a variety of backgrounds.
+  
+  Revised in an experimental version of SC rendering layer. Still work to do here...
+- Make things use semitransparent borders (see above); test on many backgrounds.
+
 
 Build Tools
 ===========
