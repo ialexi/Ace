@@ -363,7 +363,7 @@ class Slicer
         row_height = [row_height, img[:height]].max
       end
       
-      wasted_pixels += row_height * row_space
+      wasted_pixels += row_height * row_space  # empty space: free in PNG? Well, not for now, it isn't.
       y += row_height
     end
     

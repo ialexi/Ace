@@ -24,8 +24,8 @@ To generate the theme, you run the following from the theme folder:
 
     chance/chance.rb ace.light
 
-Right now, the ace.light argument is not used, but it is still a required argument.
-Silly, I know, but supposedly we'll have differently-named themes at some point, so...
+The ace.light argument supplies the theme class name. It is injected into the CSS. It is nice.
+And a required argument.
 
 "Chance" is named after the gardener from Being There.
 
@@ -153,4 +153,9 @@ container w/left portion
 	inner-tail with middle portion: left: 8, right: 8
 		Writes over any junk that comes before the right-anchored part.
 
-	
+
+Producing Production-Ready Files
+================================
+It would be best to open the files that are in resources/images in Photoshop and Save for Web. This will
+reduce the size by a large margin. For instance, in one test, the main png started at ~24,000 bytes, and
+after going through PS, finished at ~17,000.

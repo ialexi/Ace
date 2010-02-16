@@ -31,7 +31,7 @@ class CSSParser
     theme_name = @theme
     contents.gsub!(view_rule) do |match|
       #".sc-view." + $1 + "." + theme_name # If SproutCore changes some
-      ".sc-theme .sc-view." + $1
+      ".sc-theme .sc-view." + @theme + "." + $1
     end
     
     @contents = contents
