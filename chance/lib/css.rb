@@ -54,7 +54,7 @@ class CSSParser
       image_name = $1.sub(/^["'](.*)["']$/, '\1')
       
       result_hash = { 
-        :path => @directory + "/" + image_name, :image => image_name,
+        :path => File.expand_path(@directory + "/" + image_name), :image => image_name,
         :repeat => "no-repeat", :rect => [], :target => "",
         :anchor => :none, :clear => false
       }
