@@ -5,3 +5,6 @@ SC.AceTheme = SC.EmptyTheme.extend({
 });
 
 SC.Theme.register("sc-ace", SC.AceTheme);
+
+// until SC build tools automatically do this:
+SC.Pane.prototype.theme = "sc-ace";
